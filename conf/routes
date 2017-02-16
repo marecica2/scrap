@@ -1,0 +1,97 @@
+GET     /		                                Application.index
+GET     /index		        	                Application.index
+GET     /lme			                        Application.lme
+POST    /lme-period		                        Application.lmePeriod
+GET     /lme/{image}		 					Application.lmeImage
+GET     /locale	                        		Application.locale
+GET     /password		                        Application.forgotPassword
+POST    /password		                        Application.forgotPasswordPost
+GET     /about	                        		Application.about
+GET     /pricing                        		Application.pricing
+GET     /terms	                        		Application.terms
+GET 	/contact								Application.contact
+POST 	/contact								Application.contactPost
+
+GET     /notify		       		                Notify.notifiJob
+
+GET     /my-chats	       		                Application.myChats
+POST    /my-chats-post     		                Application.postChat
+
+
+
+POST    /mobile-newAd	                        Mobile.newAd
+GET	    /mobile-notifications                   Mobile.notifications
+POST    /mobile-upload	                        FileuploadController.uploadMobile
+
+GET     /public-profile	                        UserController.publicProfile
+GET     /profile		                        UserController.profile
+GET     /edit-profile	                        UserController.editProfile
+POST    /edit-profile	                        UserController.editProfilePost
+POST    /rating			                        UserController.addRate
+GET     /rating-delete	                        UserController.deleteRate
+GET     /notifications	                        UserController.notifications
+POST    /notifications	                        UserController.notificationsPost
+GET     /events			                        UserController.events
+GET     /favorites			                    UserController.favorites
+GET     /favorites-remove	                    UserController.favoritesRemove
+GET     /favorites-watch	                    UserController.favoritesWatch
+POST    /credit-add	                        	UserController.addCredit
+GET     /block				                    UserController.block
+GET     /unblock			                    UserController.unblock
+GET     /enable-notification	                UserController.enableNotification
+GET     /disable-notification	                UserController.disableNotification
+
+GET     /users-list		                        Administration.users
+GET     /users		                        	Administration.userList
+GET    	/adminchat	                        	Administration.chat
+GET    	/cron		                        	Administration.cronJobs
+GET    	/cron-delete                        	Administration.cronJobsDelete
+GET    	/online		                        	Administration.online
+GET    	/offline	                        	Administration.offline
+
+GET	    /search		                        	Ads.adList
+GET	    /user-ads	                        	Ads.adListUser
+GET	    /ad-new		                        	Ads.newAd
+POST    /ad-new		                        	Ads.newAdPost
+GET     /ad-publish	                        	Ads.adPublish
+GET     /ad-unpublish	                        Ads.adUnpublish
+GET	    /ads		                        	Ads.getAds
+GET 	/ad										Ads.ad
+GET 	/ad-edit								Ads.editAd
+GET 	/ad-delete								Ads.deleteAd
+GET		/map									Ads.map
+GET		/location								Ads.storeLocation
+GET		/process-ad								Ads.payForAd
+POST    /auction-add                        	Ads.auctionAdd
+GET     /auction-reveal                        	Ads.auctionReveal
+
+GET		/remove-upload							FileuploadController.removeFile	
+POST    /fileupload								FileuploadController.uploadFile
+POST    /photoupload							FileuploadController.uploadPhoto
+POST    /delete-temp-files						FileuploadController.deleteTmpFiles
+GET	    /delete-temp-files						FileuploadController.deleteTmpFiles
+
+GET     /registration        	                Registration.registration
+GET     /password-change      	                Registration.password
+POST    /password-change	                    Registration.passwordPost
+POST    /registration        	                Registration.registrationPost
+
+GET     /login      		                    Secure.login
+POST    /login      		                    Secure.authenticate
+GET     /logout      		                    Secure.logout
+
+GET     /captcha                                Application.captcha
+
+GET     /404      			                    Secure.404
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+GET     /css/images/                    		staticDir:public/images
+GET     /locales/                               staticDir:public/javascripts/locales
+GET     /public/                                staticDir:public
+GET     /images/                                staticDir:public/images
+GET     /theme-panel/                           staticDir:public/theme-panel
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

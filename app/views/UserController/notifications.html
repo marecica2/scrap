@@ -1,0 +1,206 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div class="container">
+	<div class="row">
+		#{include 'actionPanel.html' /}
+		<div class="span9">
+			
+			
+			<div class="box-container padding30">  
+				<form class="form-horizontal" action="" method="POST">
+			    <fieldset>
+			      <legend>
+			      	<i class="icon-bell"></i> &{'notificationSubject'}
+					#{if !user.notificationEnabled}
+						<a href="/enable-notification?url=${request.url}" class="btn btn-success">&{'enable'}</a>
+					#{/if}
+					#{if user.notificationEnabled}
+						<a href="/disable-notification?url=${request.url}" style='color:white' class="btn btn-danger">&{'disable'}</a>
+					#{/if}
+			      </legend>
+				  <div class="control-group">
+				  	<div class="controls">		
+				      <label class="checkbox"><input #{if type.contains("001")} checked="checked" #{/if} type="checkbox" name="type" value="001"> &{'ad.type.001'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("001")} checked="checked" #{/if} type="checkbox" name="category" value="001"> &{'ad.category.001'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("002")} checked="checked" #{/if} type="checkbox" name="category" value="002"> &{'ad.category.002'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("003")} checked="checked" #{/if} type="checkbox" name="category" value="003"> &{'ad.category.003'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("004")} checked="checked" #{/if} type="checkbox" name="category" value="004"> &{'ad.category.004'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("005")} checked="checked" #{/if} type="checkbox" name="category" value="005"> &{'ad.category.005'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("006")} checked="checked" #{/if} type="checkbox" name="category" value="006"> &{'ad.category.006'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("007")} checked="checked" #{/if} type="checkbox" name="category" value="007"> &{'ad.category.007'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("008")} checked="checked" #{/if} type="checkbox" name="category" value="008"> &{'ad.category.008'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("009")} checked="checked" #{/if} type="checkbox" name="category" value="009"> &{'ad.category.009'}</label>										  
+					  <label style="margin-left:40px;" class="checkbox"><input #{if category.contains("010")} checked="checked" #{/if} type="checkbox" name="category" value="010"> &{'ad.category.010'}</label>										  
+				      <label class="checkbox"><input #{if type.contains("002")} checked="checked" #{/if} type="checkbox" name="type" value="002"> &{'ad.type.002'}</label>										  
+				      <label class="checkbox"><input #{if type.contains("003")} checked="checked" #{/if} type="checkbox" name="type" value="003"> &{'ad.type.003'}</label>										  
+				      <label class="checkbox"><input #{if type.contains("004")} checked="checked" #{/if} type="checkbox" name="type" value="004"> &{'ad.type.004'}</label>										  
+				      <label class="checkbox"><input #{if type.contains("005")} checked="checked" #{/if} type="checkbox" name="type" value="005"> &{'ad.type.005'}</label>										  
+				      <label class="checkbox"><input #{if type.contains("006")} checked="checked" #{/if} type="checkbox" name="type" value="006"> &{'ad.type.006'}</label>										  
+			      	</div>
+				  </div>			      
+				</fieldset>
+
+				<form class="form-horizontal">
+			    <fieldset>
+			      <legend><i class="icon-plus"></i> &{'notificationType'}</legend>
+				  <div class="control-group">
+				  	<div class="controls">		
+				  		<!-- 
+						<label class="radio">
+						  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+						  Option one is this and that-be sure to include why it's great
+						</label>
+						<label class="radio">
+						  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+						  Option two can be something else and selecting it will deselect option one
+						</label>
+				  		 -->	  
+				      <label class="checkbox">
+				        <input type="checkbox" checked> &{'notificationEmail'}
+				      </label>										  
+			      	</div>
+				  </div>			      
+				</fieldset>
+
+
+			    <fieldset>
+			      <legend><i class="icon-time"></i> &{'notificationTime'}</legend>
+				  <div class="row">
+				  <div class="span3">
+				  <div class="control-group">
+					<label class="control-label" for="inputPassword">&{'notificationDays'}</label>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="MON" #{if day.contains("MON")} checked="checked" #{/if}> &{'monday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="TUE" #{if day.contains("TUE")} checked="checked" #{/if}> &{'tuesday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="WED" #{if day.contains("WED")} checked="checked" #{/if}> &{'wednesday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="THU" #{if day.contains("THU")} checked="checked" #{/if}> &{'thursday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="FRI" #{if day.contains("FRI")} checked="checked" #{/if}> &{'friday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="SAT" #{if day.contains("SAT")} checked="checked" #{/if}> &{'saturday'}
+				      </label>	
+				    </div>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="day" value="SUN" #{if day.contains("SUN")} checked="checked" #{/if}> &{'sunday'}
+				      </label>	
+				    </div>
+				  
+				  </div>
+				  </div>
+				  
+				  <div class="span3">
+				  <div class="control-group">
+					<label class="control-label" for="inputPassword">&{'notificationHours'}</label>
+				  	<div class="controls">		
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="1" #{if hour.contains("1")} checked="checked" #{/if}> 01:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="2" #{if hour.contains("2")} checked="checked" #{/if}> 02:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="3" #{if hour.contains("3")} checked="checked" #{/if}> 03:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="4" #{if hour.contains("4")} checked="checked" #{/if}> 04:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="5" #{if hour.contains("5")} checked="checked" #{/if}> 05:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="6" #{if hour.contains("6")} checked="checked" #{/if}> 06:00
+				      </label>									  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="7" #{if hour.contains("7")} checked="checked" #{/if}> 07:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="8" #{if hour.contains("8")} checked="checked" #{/if}> 08:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="9" #{if hour.contains("9")} checked="checked" #{/if}> 09:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="10" #{if hour.contains("10")} checked="checked" #{/if}> 10:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="11" #{if hour.contains("11")} checked="checked" #{/if}> 11:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="12" #{if hour.contains("12")} checked="checked" #{/if}> 12:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="13" #{if hour.contains("13")} checked="checked" #{/if}> 13:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="14" #{if hour.contains("14")} checked="checked" #{/if}> 14:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="15" #{if hour.contains("15")} checked="checked" #{/if}> 15:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="16" #{if hour.contains("16")} checked="checked" #{/if}> 16:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="17" #{if hour.contains("17")} checked="checked" #{/if}> 17:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="18" #{if hour.contains("18")} checked="checked" #{/if}> 18:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="19" #{if hour.contains("19")} checked="checked" #{/if}> 19:00
+				      </label>										 
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="20" #{if hour.contains("20")} checked="checked" #{/if}> 20:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="21" #{if hour.contains("21")} checked="checked" #{/if}> 21:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="22" #{if hour.contains("22")} checked="checked" #{/if}> 22:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="23" #{if hour.contains("23")} checked="checked" #{/if}> 23:00
+				      </label>										  
+				      <label class="checkbox">
+				        <input type="checkbox" name="hour" value="24" #{if hour.contains("24")} checked="checked" #{/if}> 24:00
+				      </label>										  
+			      	</div>
+    			  </div>
+				  </div>
+				  </div>
+				  </fieldset>
+
+				  
+				  
+				  <div class="control-group">
+				    <div class="controls">
+				      <button type="submit" class="pull-right btn-realto btn btn-success">&{'save'}</button>
+				    </div>
+				  </div>
+				</form>			
+			</div>		
+		</div>
+	</div>
+</div>
+

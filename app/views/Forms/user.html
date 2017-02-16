@@ -1,0 +1,68 @@
+<div class="form-group" style="margin-bottom:20px">
+	<label class="segoe" for="name">&{'registration.type'}</label> 
+	<select class="span6" name="type" id="select-type" data-type="${params.type}">
+		<option value="personal" #{if params.type == "personal"} selected="selected" #{/if}>&{'registration.type.personal'}</option>
+		<option value="business" #{if params.type == "business"} selected="selected" #{/if}>&{'registration.type.business'}</option>
+	</select>
+	<script>
+		$(document).ready(function(){
+		    #{if user && user.account.type == "business" || params.type == "business"}
+		    	$("#accountDetails").show();
+		    #{/if}
+		    
+		    $("#select-type").change(function(){
+		        if($(this).val() == "personal"){
+		            $("#accountDetails").hide();
+		        } else {
+		            $("#accountDetails").show();
+		        }
+		    });
+		});
+	</script>
+</div>
+
+#{if !user}
+<div class="form-group">
+	<input type="text" class="span6" id="login" name="login" value="${params.login}" placeholder="&{'registration.login'}"/>
+	<div class="error">#{error 'login' /}</div>
+</div>
+#{/if}
+<div class="form-group">
+	<input type="text"  class="span6" id="firstName" name="firstName" value="${params.firstName}"  placeholder="&{'input.first'}"/>
+	<div class="error">#{error 'firstName' /}</div>
+</div>
+<div class="form-group">
+	<input type="text"  class="span6" id="lastName" name="lastName" value="${params.lastName}"  placeholder="&{'input.last'}"/>
+	<div class="error">#{error 'lastName' /}</div>
+</div>
+#{if !user}
+<div class="form-group">
+	<input type="password"class="span6" id="password" name="password" value="${params.password}"  placeholder="&{'input.password'}"/>
+	<div class="error">#{error 'password' /}</div>
+</div>
+<div class="form-group">
+	<input type="password" class="span6" id="passwordRepeat" name="passwordRepeat" value="${params.passwordRepeat}"  placeholder="&{'input.password.repeat'}"/>
+	<div class="error">#{error 'passwordRepeat' /}</div>
+</div>
+#{/if}
+
+#{if user}
+<br/>
+<h2>&{'contact'}</h2>
+<div class="form-group">
+	<input type="text"  class="span6" id="usrPhone" name="usrPhone" value="${params.usrPhone}"  placeholder="&{'usrPhone'}"/>
+	<div class="error">#{error 'usrPhone' /}</div>
+</div>
+<div class="form-group">
+	<input type="text"  class="span6" id="usrCellPhone" name="usrCellPhone" value="${params.usrCellPhone}"  placeholder="&{'usrCellPhone'}"/>
+	<div class="error">#{error 'usrCellPhone' /}</div>
+</div>
+<div class="form-group">
+	<input type="text"  class="span6" id="usrFax" name="usrFax" value="${params.usrFax}"  placeholder="&{'usrFax'}"/>
+	<div class="error">#{error 'usrFax' /}</div>
+</div>
+<div class="form-group">
+	<input type="text"  class="span6" id="usrEmail" name="usrEmail" value="${params.usrEmail}"  placeholder="&{'usrEmail'}"/>
+	<div class="error">#{error 'usrEmail' /}</div>
+</div>
+#{/if}

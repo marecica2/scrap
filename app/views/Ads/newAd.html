@@ -1,0 +1,100 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreStyles'}
+#{/set}
+
+#{set 'moreScripts'}
+#{/set}
+
+
+
+<div class="container">
+	<div class="row">
+		#{include 'actionPanel.html' /}
+		
+		<div class="span9">
+			<div class="box-container padding30">
+				
+				<form method="post" action="/ad-new">
+				
+
+					<!-- file upload -->
+					<button type="button" id="upload-button" class="btn btn-primary btn-realto">&{'upload.photos'}</button>
+					<input type="file" id="upload" name="upload" multiple style="display:none">
+					<input type="hidden" id="temp" name="temp" value="${temp}"/>
+					#{if edit}
+						<input type="hidden" id="edit" name="edit" value="${edit}"/>
+					#{/if}
+					<script>
+						$(document).ready(function(){
+							$("#upload-button").click(function(){
+							    $("#upload").click();
+							});
+							$("#upload").change(function(){
+							    
+							    // on edit page set ads uuid 
+							    var params = "";
+							    #{if edit}params = "?item=${edit}";#{/if}
+							    #{if temp}params = "?temp=${temp}";#{/if}
+							    
+					    		scrap.uploadFiles('/fileupload'+params, this.files, function(json){
+					    		    var resp = JSON.parse(json);
+					    		    $("#images").append("<img class='img-polaroid' style='height:100px;margin-bottom:4px' src='public/uploads/"+resp.url+"_thumb'>");
+					    		});
+							});
+						});
+					</script>
+					<br/>
+					<div id="images">
+						#{if files}
+							#{list items:files, as:'file'}
+								<div style="position:relative; float:left;margin:5px;">
+						        <img class="img-polaroid" style="height:100px;margin-bottom:4px" src="/public/uploads/${file.url}_thumb" alt="${file.name}" title="${file.name}">
+								<a href="/remove-upload?uuid=${file.uuid}&url=${request.url}" style="position:absolute;top:5px;left:10px"><i class="icon-remove"></i></a>
+								</div>
+							#{/list}
+						#{/if}
+					</div>
+					<div class="clear"></div>
+					<br/>
+					<div id="progresses">
+					</div>
+					<!-- file upload -->
+	
+				
+					#{include 'Forms/ad.html' /}
+	
+				
+					<!-- Google map -->
+					<div class="form-group">
+						<input type="text" readonly="readonly" class="" style="width:98%" id="location" name="location" value="${params.location}"  placeholder="&{'location'}"/>
+						<input type="hidden" id="x" name="x" value="${params.x}"/>
+						<input type="hidden" id="y" name="y" value="${params.y}"/>
+						<input type="hidden" id="street_number" name="streetNumber" value="${params.streetNumber}"/>
+						<input type="hidden" id="route" name="street" value="${params.street}"/>
+						<input type="hidden" id="locality" name="city" value="${params.city}"/>
+						<input type="hidden" id="country" name="country" value="${params.country}"/>
+						<div class="error">#{error 'location' /}</div>
+					</div>					
+					<iframe src="/map?uuid=${temp}&x=${params.x}&y=${params.y}&search=true" width="100%" height="300px;"></iframe>	
+					<br/>			
+					<br/>			
+	
+	
+	
+					<div class="form-group">
+						<span class="pull-right">
+						<a href="/profile" class="" style="margin:20px;">&{'cancel'}</a>
+						<button class="btn btn-default  btn-realto" type="submit">&{'save'}</button>				
+						</span>
+					</div>
+					<div class="clear"></div>
+					
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</div>
+

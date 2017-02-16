@@ -1,0 +1,64 @@
+#{extends 'main.html' /} 
+#{set background:'true' /}
+
+#{set 'title'}
+	&{'login'}
+#{/set}
+
+#{set 'moreScripts'}
+#{/set}
+
+<div id="home-search-container" class="body">
+<div class="container segoe">
+<div class="row">
+	<div class="head-container shadow" style="max-width:400px;margin:auto;padding:40px;">
+		<form action="/login" method="POST">
+		    #{authenticityToken /}
+		    
+		    <h2 class="segoe"><i class="fa fa-sign-in"></i> &{'login'}</h2>
+		    <hr>
+		    
+		    <!-- 
+			#{if flash.securityError}	
+			<div class="alert alert-danger alert-dismissable">
+		  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  		<small><strong>${flash.securityError}</strong></small>
+			</div>
+			#{/if}
+
+			#{if flash.access}	
+			<div class="alert alert-danger alert-dismissable">
+		  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  		<small><strong>${flash.access}</strong></small>
+			</div>
+			#{/if}
+
+			#{if flash.success}	
+			<div class="alert alert-success alert-dismissable">
+		  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  		<small><strong>${flash.success}</strong></small>
+			</div>
+			#{/if}
+		     -->
+			
+			<div class="form-group">
+				<input type="text" class="full-width big" id="login" name="username" placeholder="&{'input.login'}" autofocus/>
+			</div>
+	
+			<div class="form-group">
+				<input type="password" class="full-width big"  id="password" name="password" placeholder="&{'input.password'}"/>
+			</div>
+	
+			&{'login.question'}<a href="/registration"> &{'login.register'}</a>
+			<br/><a href="/password"> &{'forgot'}.</a>
+			<br/>
+			<br/>
+			<button class="btn btn-large btn-realto span2 pull-right header-cta" style="top: 0px;"><i class="fa fa-sign-in"></i> &{'log.in'}</button>
+			<br/>
+			<br/>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+

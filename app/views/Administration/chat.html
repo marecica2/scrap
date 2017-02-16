@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreScripts'}
+	<script>
+		scrap.chat = true;
+	</script>
+#{/set}
+
+<div class="container box-container ">
+	<div class="row">
+		<div class="span12 padding30">
+			<h2><i class="icon-comments"></i> Online Chat
+				#{if user.online != null}
+					<a href="/offline?url=${request.url.urlEncode()}" class="btn btn-xs btn-warning">Vypnúť chat</a>
+				#{/if}
+				#{else}
+					<a href="/online?url=${request.url.urlEncode()}" class="btn btn-xs btn-success">Zapnúť chat</a>
+				#{/else}
+			</h2>
+			#{if user.isAdmin()} 
+			<select id="chat-to">
+				<option value="">&{'selectUser'}</option>
+			</select> 
+			#{/if}
+			<div class="segment">
+				<input type="text" id="chat-text" style="display: block; width: 99%">
+				<br/>
+				<div id="chat-container" style="height: 400px; overflow-y: scroll"></div>
+				<br/>
+				<button id="chat-send" class="btn btn-realto">&{'submit'}</button>
+			</div>
+		</div>
+	</div>
+</div>
+

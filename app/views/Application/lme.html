@@ -1,0 +1,114 @@
+#{extends 'main.html' /}
+#{set title:'LME' /}
+
+#{set 'moreStyles'}
+#{/set}
+
+#{set 'moreScripts'}
+#{/set}
+
+
+<div class="container">
+	<div class="row">
+	
+		<div class="span12">
+			<div class="box-container">
+			<div class="padding30">
+				<h2><i class="icon-star-empty"></i> LME Live</h2>
+				<div class="alert">
+				  <button type="button" class="close" data-dismiss="alert">&times;</button>
+				  <strong>&{'note1'}</strong> &{'note2'}
+				</div>
+				<form class="form-inline" action="/lme-period?url=${request.url}" method="post">
+				  <label class="checkbox">
+				   	&{'frequency'}
+				  </label>
+					<select name="period">
+						<option value="600000" #{if user.lmePeriod == 600000} selected="selected" #{/if} >10 min</option>
+						<option value="300000" #{if user.lmePeriod == 300000} selected="selected" #{/if} >5 min</option>
+						<option value="120000" #{if user.lmePeriod == 120000} selected="selected" #{/if} >2 min</option>
+						<option value="60000"  #{if user.lmePeriod == 60000} selected="selected"  #{/if} >1 min</option>
+						<option value="30000"  #{if user.lmePeriod == 30000} selected="selected"  #{/if} >30 sek</option>
+						<option value="10000"  #{if user.lmePeriod == 10000} selected="selected" #{/if}  >10 sek</option>
+					</select>
+				  <button type="submit" class="btn">&{'save'}</button>
+				  <button type="button" id="stop" class="btn btn-danger">&{'stop'}</button>
+				  <button type="button" id="refresh" class="btn btn-success">&{'refresh'}</button>
+				</form>				
+				<div class="btn-group">
+				  <a href="?page=001" class="btn btn-primary btn-small">LME Main</a>
+				  <a href="?page=002" class="btn btn-primary btn-small">LME Select</a>
+				  <a href="?page=003" class="btn btn-primary btn-small">FX</a>
+				  <a href="?page=004" class="btn btn-primary btn-small">Indices</a>
+				  <a href="?page=005" class="btn btn-primary btn-small">CU</a>
+				  <a href="?page=006" class="btn btn-primary btn-small">AL</a>
+				  <a href="?page=007" class="btn btn-primary btn-small">ZN</a>
+				  <a href="?page=008" class="btn btn-primary btn-small">NI</a>
+				  <a href="?page=009" class="btn btn-primary btn-small">PB</a>
+				  <a href="?page=010" class="btn btn-primary btn-small">SN</a>
+				  <a href="?page=011" class="btn btn-primary btn-small">AA</a>
+				  <a href="?page=012" class="btn btn-primary btn-small">NA</a>
+				  <a href="?page=013" class="btn btn-primary btn-small">Reports</a>
+				  <a href="?page=014" class="btn btn-primary btn-small">News</a>
+				  <a href="?page=004" class="btn btn-primary btn-small">Search</a>
+				</div>				
+				<div style="overflow:hidden !important;">
+					<img id="myimg" src="/lme/${request.params.page}.png" class="stretch" />
+				</div>
+			</div>			
+			</div>			
+		</div>
+		<script>
+			var stopped = false;
+			var period = parseInt(${user.lmePeriod});
+			var substract = 1; 
+			var toDate = (new Date()).getTime() + 60000;
+			if(isNaN(period)){
+			    period = 600000;
+			}
+		
+			$(document).ready(function(){
+			    $("#refresh").click(function(){
+			        updateImage();		        
+			    });
+			    
+			    $("#stop").click(function(){
+			        stopped = !stopped;
+			        if(stopped){
+				        $(this).removeClass("btn-danger");
+				        $(this).html("Resume");
+				        $(this).addClass("btn-info");
+			        } else {
+				        $(this).addClass("btn-danger");
+				        $(this).html("Stop");
+				        $(this).removeClass("btn-info");
+				        toDate = (new Date()).getTime() + 60000;
+			        }
+			    });
+			    
+			});
+			
+			setInterval(function(){
+			    var time = (new Date()).getTime();
+			    if(time > toDate){
+			        stopped = true;
+			        $("#stop").removeClass("btn-danger");
+			        $("#stop").html("Resume");
+			        $("#stop").addClass("btn-info");			        
+			    }
+			    
+			    if(!stopped)
+					updateImage();
+			}, period);	
+			
+			function updateImage(){
+			    $("#myimg").attr("src", "/lme/${request.params.page}.png?"+new Date().getTime());
+			    var credit = parseFloat($("#credit-container").html());
+			    credit = credit - substract;
+			    credit = Math.round( credit * 10 ) / 10;
+			    $("#credit-container").html(credit+"");				    
+			};
+		</script>		
+	</div>
+</div>
+

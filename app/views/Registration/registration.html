@@ -1,0 +1,52 @@
+#{extends 'main.html' /}
+#{set background:'true' /}
+#{set 'title'}
+	&{'registration'}
+#{/set}
+
+<div id="home-search-container" class="body">
+<div class="container">
+<div class="row">
+	<div class="span3"></div>
+	<div class="span6 shadow" style="padding:40px;background:rgba(255,255,255,0.9)">
+		<form class="" action="/registration" method="POST">
+		    <h2 class="segoe">&{'registration'}</h2>
+		    <hr>
+			
+		    #{if errors}
+		    	<div class="error">
+		    		#{error 'all' /}
+		    	</div>
+			#{/if} 
+			
+			<br/>
+			<h2 class="segoe">&{'registration.personalDetails'}</h2>
+			#{include 'Forms/user.html' /}
+					
+			<br/>
+			<div id="accountDetails" style="display:none">
+				<h2 class="segoe">&{'registration.accountDetails'}</h2>
+				#{include 'Forms/account.html' /}
+			</div>
+			
+			<div class="form-group">
+				<input type="hidden" value="${params.uuid}" name="uuid" />
+				<input type="text" placeholder="&{'captcha'}" class="big3" style="display:inline !important;width:20%" name="captcha"/>
+				<img src="/captcha?uuid=${params.uuid}">
+				<div class="error">#{error 'captcha' /}</div>
+			</div>				 
+			
+			<div class="form-group">
+				
+				<button class="btn span2 btn-realto pull-right" type="submit">&{'register'}</button>				
+				<a href="/" class="pull-right" style="margin:5px;margin-right:20px">&{'cancel'}</a>
+			</div>
+			<div style="clear:both"></div>
+		</form>
+	</div>
+	<div class="span3"></div>
+
+</div>
+</div>
+</div>
+

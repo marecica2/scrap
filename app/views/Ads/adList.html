@@ -1,0 +1,108 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" href="/public/css/blueimp-gallery.css">
+<link rel="stylesheet" href="/public/css/blueimp-gallery-indicator.css">
+<link rel="stylesheet" href="/public/css/blueimp-gallery-video.css">
+#{/set}
+
+#{set 'moreScripts'}
+#{/set}
+
+
+
+
+<div class="container">
+<div class="row">
+<form id="search-form" action="/search" method="get" onsubmit="window.location.hash='';">
+
+
+<div class="span4 widget">
+	<div class="con-sidebar">
+		
+     <div id="dsidx-search-2" class="box-container widget dsidx-widget-search">
+     <div class="padding30">
+     <h2 class="widget-title">&{'search'}</h2>			
+     <div class="dsidx-search-widget dsidx-widget">
+			
+				#{set search:true /}
+				#{include 'Forms/ad.html' /}			
+				<div style="clear:both"></div>
+				<br/>
+				<input type="hidden" name="search" value="search">
+				<div class="">
+					<button type="submit" id="search-button" class="btn btn-realto span2 pull-right" style="margin:4px;top: 0px;"><i class="icon-arrow-right"></i> &{'search1'}</button>
+					<a type="reset" class=" span  pull-right" style="padding:5px;margin:5px;" href="/search">&{'reset'}</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		</div>
+
+
+</div></div>    
+    
+<!-- .span4 -->
+
+
+<div class="span8" style="right: 300px !important;">
+	<h2 class="page-title">&{'search.results'}</h2>
+			
+	<div id="dsidx" class="dsidx-results">
+		<div class="dsidx-paging-control"> 
+		</div>
+		
+		
+		<div class="dsidx-sorting-control"> &{'sortedBy'}
+			<select name="sorting">
+				<option value="timeDesc"  #{if params.sorting == "timeDesc"} selected="selected" #{/if}>&{'timedesc'}</option>
+				<option value="timeAsc"  #{if params.sorting == "timeAsc"} selected="selected" #{/if}>&{'timeasc'}</option>
+				<option value="priceAsc"  #{if params.sorting == "priceAsc"} selected="selected" #{/if}>&{'priceasc'}</option>
+				<option value="priceDesc"  #{if params.sorting == "priceDesc"} selected="selected" #{/if}>&{'pricedesc'}</option>
+				<option value="amountAsc"  #{if params.sorting == "amountAsc"} selected="selected" #{/if}>&{'amountasc'}</option>
+				<option value="amountDesc"  #{if params.sorting == "amountDesc"} selected="selected" #{/if}>&{'amountdesc'}</option>
+			</select>
+		</div>
+		<br/>
+		
+		
+		<div id="advert-container"></div>
+	
+	
+		<div class="box-container" id="showMoreContainer">  
+			<table>
+				<tr>
+					<td style="padding:10px;text-align:center;width:100%;height:100%">
+						<a href="#" id="moreResults">&{'moreResults'}</a>
+					</td>
+					<td class="label label-important" style="padding:30px;">
+						<a style="color:white" href="#top">
+							<i class="icon-arrow-up"></i>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+	
+		<div style="height:150px;">&nbsp;
+			<div id="spinner" style="display:none;height:150px;background: url(public/img/loading.gif) center no-repeat"></div>
+		</div>
+		
+		<script>
+			scrap.initAds();
+		</script>	
+	</div>
+	
+</div>
+<!-- .span8 -->
+
+
+
+
+
+</form>
+</div>
+</div>
+

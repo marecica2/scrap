@@ -1,0 +1,20 @@
+<div class="span3">
+	#{if user}
+	<div class="box-container padding30" style="border-left:5px solid #af2829">
+		<h2 class="widget-title">&{'administration'}</h2>
+		<ul class="list-clear">
+			<li><a href="/ad-new"><i class="icon-plus"></i> &{'newAd'}</a></li>
+			<li><a href="/profile"><i class="icon-list"></i> &{'myAds'}</a></li>
+			<li><a href="/favorites"><i class="icon-star"></i> &{'favoriteAds'}</a></li>
+			<li>&nbsp;</li>
+			<li><a href="/edit-profile"><i class="icon-user"></i> &{'editProfile'}</a></li>
+			<li><a href="/password-change"><i class="icon-key"></i> &{'passwordChange'}</a></li>
+			<li><a href="/notifications"><i class="icon-bell"></i> &{'notifications'}</a></li>
+			<li>&nbsp;</li>
+			<li><a href="/events"><i class="icon-list"></i> &{'buyCredit'}</a></li>
+		</ul>
+	</div>
+	#{/if}
+	
+	#{include 'adSense.html' /}		
+</div>

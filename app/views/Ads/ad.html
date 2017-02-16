@@ -1,0 +1,482 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" href="/public/css/blueimp-gallery.css">
+<link rel="stylesheet" href="/public/css/blueimp-gallery-indicator.css">
+<link rel="stylesheet" href="/public/css/blueimp-gallery-video.css">
+#{/set}
+
+#{set 'moreScripts'}
+#{/set}
+
+
+
+
+<div class="container">
+	<div class="row">
+	
+		#{if owner}
+			#{include 'actionPanel.html' /}
+		#{/if}
+	
+		<div class="span9">
+			#{if user && (isOwner || user.isAdmin())}
+            <div class="pull-right" >
+	            #{if ad.auction}
+	            	#{if ad.state == "001" || ad.expired}
+		            <a href='/ad-publish?uuid=${ad.uuid}&url=${request.url}&auction=true'><span style="padding:5px;" class="label label-success">&nbsp;<i class="icon-ok"></i> &{'auction.begin'} &nbsp;</span></a>  
+		            #{/if}
+	            	#{if ad.state == "002" && !ad.expired}
+		            <a href='/ad-unpublish?uuid=${ad.uuid}&url=${request.url}&auction=true'><span style="padding:5px;" class="label label-important">&nbsp; <i class="icon-remove"></i> &{'auction.end'} &nbsp;</span></a>  
+		            #{/if}
+	            #{/if}
+	            #{else}
+	            	#{if ad.state == "001" || ad.expired}
+		            <a href='/ad-publish?uuid=${ad.uuid}&url=${request.url}'><span style="padding:5px;" class="label label-success">&nbsp;<i class="icon-ok"></i> &{'ad.publish'} &nbsp;</span></a>  
+		            #{/if}
+	            	#{if ad.state == "002" && !ad.expired}
+		            <a href='/ad-unpublish?uuid=${ad.uuid}&url=${request.url}'><span style="padding:5px;" class="label label-important">&nbsp; <i class="icon-remove"></i> &{'ad.unpublish'} &nbsp;</span></a>  
+		            #{/if}
+	            #{/else}
+	            <a href='/ad-edit?uuid=${ad.uuid}'><span style="padding:5px;" class="label label-info">&nbsp;<i class="icon-pencil"></i> &{'edit'} &nbsp;</span></a>  
+	            <a href='/ad-delete?uuid=${ad.uuid}'><span style="padding:5px;" class="label label-important">&nbsp;<i class="icon-trash"></i> &{'delete'} &nbsp;</span></a> 
+            </div>
+            <br/>
+            <br/>
+            <div class="clearfix"></div>
+            #{/if}
+            
+
+            
+            		
+			<div class="box-container">
+			<div class="padding30">
+            	#{if ad.expired}
+					<p class="label label-important">&{'ad.expired'}</p>
+	            #{/if}
+
+				
+				<div class="pull-right"> 
+					&nbsp;&nbsp;
+	            	#{if adWatch}
+					<a href="/favorites-watch?uuid=${ad.uuid}&watch=${adWatch.uuid}&url=${request.url}" style="font-size:1.5em" ><i class="icon-star"></i></a>
+		            #{/if}
+		            #{else}
+					<a href="/favorites-watch?uuid=${ad.uuid}&url=${request.url}" style="font-size:1.5em" ><i class="icon-star-empty"></i></a>
+		            #{/else}
+				</div>
+				<div class="pull-right"> 
+					<i class="icon-calendar""></i> &{'added'}: ${ad.formatDate(ad.published)}
+				</div>
+				<div class="pull-left"><span style="font-size:1.3em;font-weight:bold;color:black"><i class="icon-tag"></i> &{'ad.pricetype.'+ad.priceType}</span> , &{'ad.'+ad.buySell} &nbsp;</div>
+				<div class="clearfix"></div>
+				<div style="font-size:1.1em"> 
+					<b>&{'ad.category'}:</b>
+					<a href="/search?type=${ad.type}">&{'ad.type.'+ad.type}</a>
+					#{if ad.category != "" && ad.category != undefined}
+						/ <a href="/search?type=${ad.type}&category=${ad.category}">&{'ad.category.'+ad.category}</a> 
+						#{if ad.subCategory != "" && ad.subCategory != undefined}
+							 / <a href="/search?type=${ad.type}&category=${ad.category}&subCategory=${ad.subCategory}">&{'ad.subcategory.'+ad.subCategory}</a>
+						#{/if}
+					#{/if}
+				</div>
+				#{if ad.auction}
+						#{if ad.state == "002" && !ad.expired}
+							<br/>
+		            		<div class="hammer"></div><span style="font-size:1.5em;" class="text-error"> &{'ad.auction.running'}</span>
+		            		<br/>
+            			#{/if}		
+	            #{/if}			
+				<p>
+					#{if ad.auction}
+					<script>
+					var end = new Date(${ad.validTo});
+					
+					    var _second = 1000;
+					    var _minute = _second * 60;
+					    var _hour = _minute * 60;
+					    var _day = _hour * 24;
+					    var timer;
+					
+					    function showRemaining() {
+					        var now = new Date();
+					        var distance = end - now;
+					        if (distance < 0) {
+					
+					            clearInterval(timer);
+					            document.getElementById('countdown').innerHTML = '<span style="color:#d23435">&{"ad.auction.ended"}</span>';
+					
+					            return;
+					        }
+					        var days = Math.floor(distance / _day);
+					        var hours = Math.floor((distance % _day) / _hour);
+					        var minutes = Math.floor((distance % _hour) / _minute);
+					        var seconds = Math.floor((distance % _minute) / _second);
+					
+					        var strDays = days > 4 ? i18n("days") : (days != 1 ? i18n("days1") : i18n("day"));
+					        var strHours = hours > 4 ? i18n("hours") : (hours != 1 ? i18n("hours1") : i18n("hour"));
+					        var strMinutes = minutes > 4 ? i18n("minutes") : (minutes != 1 ? i18n("minutes1") : i18n("minute"));
+					        var strSeconds = seconds > 4 ? i18n("seconds") : (seconds != 1 ? i18n("seconds1") : i18n("second"));
+					        
+					        document.getElementById('countdown').innerHTML = days + " " + strDays + " ";
+					        document.getElementById('countdown').innerHTML += hours + " " + strHours + " ";
+					        document.getElementById('countdown').innerHTML += minutes + " " + strMinutes + " ";
+					        document.getElementById('countdown').innerHTML += seconds + " " + strSeconds + " ";
+					    }
+					
+					    timer = setInterval(showRemaining, 1000);
+					</script>
+					</p>
+	            	
+					<dl class="dl-horizontal">
+					  <dt>
+						&{'auction.end'}            		
+					  </dt>
+					  <dd>
+					  	<span style="font-size:1.3em;color:black" id="countdown">&nbsp;</span>&nbsp;
+					  </dd>
+					  <dt>
+						&{'auction.offers'}	            		
+					  </dt>
+					  <dd>
+					  	<a href="#auctions">${auctions.size()}, &{'view.offers'} &raquo;</a>
+					  </dd>
+					</dl>	            	
+	            	
+	            	#{/if}
+	            	#{else}
+						
+	            	#{/else}
+			</div>
+			<div class="clearfix"></div>
+			
+			
+
+
+			<div style="background-color:#fcfcfc;border-left:5px solid #b94a48;padding:10px 0px">
+			<div class="row-fluid">
+				<div class="padding30 panel-left" >
+					#{if ad.amount != null}
+					<p>&{'ad.amount'}:</p>
+				 	<span style="font-size:1.5em;font-weight:bold;color:black">${ad.amount} kg</span>
+				 	<br/>
+				 	<br/>
+				 	#{/if}
+				 	#{if ad.auction && ad.price != null}
+					<p>&{'ad.auction.price'}:</p>
+				 	<span style="font-size:2.2em;font-weight:bold;color:black">${ad.price} &euro;</span>
+				 	<br/>
+				 	<br/>
+				 	#{/if}
+				 	#{else}
+					<p>&{'ad.price'}:</p>
+				 	<span style="font-size:2.2em;font-weight:bold;color:black">${ad.price} &euro;</span>
+				 	<br/>
+				 	<br/>
+				 	#{/else}
+				 	#{if ad.auction && maxOffer != null}
+					<p>&{'ad.auction.maxoffer'}:</p>
+				 	<span style="font-size:2.4em;font-weight:bold;color:black">${maxOffer} &euro;</span>
+				 	<br/>
+				 	<br/>
+				 	#{/if}
+				 	
+					#{if !paid}
+						#{if user != null}
+							<a href="/process-ad?ad=${ad.uuid}&url=${request.url}" class="btn btn-large btn-realto"><i class="icon-plus"></i> &{'reveal.ad'}</a> 
+						#{/if}
+						#{else}
+							<a href="/login?url=${request.url}" class="btn btn-large btn-realto"><i class="icon-plus"></i> &{'loginToShow'}</a> 
+						#{/else}
+						<br/><small><a href="/pricing">&{'paidInformation'}&nbsp;»</a></small>
+					#{/if}
+					#{if ad.auction && !isOwner && paid}
+						#{if ad.state == "002"}
+				            <form action="/auction-add?uuid=${ad.uuid}&url=${request.url}" method="POST">
+								<div class="input-append">
+								  <input class="" name="offer" value="${newOffer}" style="width:40%;height:50px;font-size:20px;font-weight:bold" id="appendedInputButton" type="text">
+								  <button type="submit" style="height:60px" class="btn btn-danger bnt-large" type="button"><div class="hammer-white"></div> &{'ad.auction.add'}</button>
+								</div>
+    		   					<a href="">&{'paidInformation'} &raquo;</a>
+				            </form>
+						#{/if}					
+					#{/if}					
+				</div>
+				<div class="panel-right" >
+				
+					#{if !paid && ad.fileUploads.size() > 0}
+					<div class="padding10">
+					<div class="alert alert-success alert-dismissable" style="margin:15px 0px;">
+				  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  		<small><strong>&{'photos.paid'}.</strong> &{'photos.count'}: ${ad.fileUploads.size()}</small>
+				  		<small><a href="/pricing">&{'paidInfo'}&nbsp;»</a></small>
+					</div>		
+					</div>
+					#{/if}				
+				
+					<!-- image gallery -->
+					<div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+					    <div class="slides"></div>
+					    <h3 class="title"></h3>
+					    <a class="prev">‹</a>
+					    <a class="next">›</a>
+					    <a class="play-pause"></a>
+					    <ol class="indicator"></ol>
+					</div>				
+		
+					<div id="blueimp-gallery" class="blueimp-gallery">
+					    <div class="slides"></div>
+					    <h3 class="title"></h3>
+					    <a class="prev">‹</a>
+					    <a class="next">›</a>
+					    <a class="close">×</a>
+					    <a class="play-pause"></a>
+					    <ol class="indicator"></ol>
+					</div>
+					
+					#{if paid}	
+					<div style="width:100%;text-align:left">
+					<div id="links">
+						#{if ad.fileUploads.size() > 0}	
+							#{list items:ad.fileUploads, as:'file'}
+						    <a href="/public/uploads/${file.url}" title="${file.name}">
+						        <img style="height:50px" src="/public/uploads/${file.url}_thumb" alt="${file.name}">
+						    </a>
+							#{/list}
+						#{/if}
+						#{else}
+							<div style="width:100%;text-align:left">
+							<div id="links">
+							    <a href="/public/images/no-photo.jpg" title="No image">
+							        <img style="height:50px" src="/public/images/no-photo.jpg" >
+							    </a>
+							</div>
+							</div>
+						#{/else}						
+					</div>
+					</div>
+					#{/if}
+					#{else}
+					<div style="width:100%;text-align:left">
+					<div id="links">
+					    <a href="/public/images/no-photo.jpg" title="No image">
+					        <img style="height:50px" src="/public/images/no-photo.jpg" >
+					    </a>
+					</div>
+					</div>
+					#{/else}
+					
+		
+					<script>
+					document.getElementById('links').onclick = function (event) {
+					    event = event || window.event;
+					    var target = event.target || event.srcElement,
+					        link = target.src ? target.parentNode : target,
+					        options = {index: link, event: event},
+					        links = this.getElementsByTagName('a');
+					    blueimp.Gallery(links, options);
+					};
+					</script>
+					
+					<script src="/public/js/blueimp-gallery.min.js"></script>
+					<script>
+					if(!scrap.utils.mobilecheck()){
+						blueimp.Gallery(
+						    document.getElementById('links').getElementsByTagName('a'),
+						    {
+						        container: '#blueimp-gallery-carousel',
+						        carousel: true
+						    }
+						);
+					}
+					</script>
+					<!-- image gallery -->
+				</div>			
+			</div>			
+			</div>			
+			
+			
+			<!-- Google map -->
+			<div style="margin-top:2px;" class="padding10">
+				#{if !paid}
+					<div class="alert alert-success alert-dismissable" style="margin:15px 0px;">
+				  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				  		<small><strong>&{'location.paid'}</strong></small>
+				  		<small><a href="/pricing">&{'paidInfo'}&nbsp;»</a></small>
+					</div>			
+				#{/if}					
+			
+				#{if paid}
+					<iframe src="/map?uuid=${ad.uuid}&x=${ad.locationX}&y=${ad.locationY}" width="100%" height="200px;"></iframe>
+				#{/if}
+				#{else}
+					<iframe src="/map?uuid=${ad.uuid}" width="100%" height="300px;"></iframe>
+				#{/else}
+			</div>
+			<!-- Google map -->
+			
+			
+			<!-- Ad Details -->
+
+			<div class="">
+				<div class="padding30">
+				<div class="span5">
+					<div id="peoplemodule_heading" class="line">
+						<h2 class="toggle-title"><i class="icon-chevron-right"></i> &{'ad.details'}</h2>
+					</div>	
+
+					&{'ad.type'} &{'ad.type.'+ad.type}
+					#{if ad.category != "" && ad.category != undefined}
+						- &{'ad.category.'+ad.category}
+						#{if ad.subCategory != "" && ad.subCategory != undefined}
+							 - &{'ad.subcategory.'+ad.subCategory}
+						#{/if}
+					#{/if}
+					<br/>
+					&{'ad.price'}
+					${ad.price} &euro;
+					<br/>
+					&{'ad.amount'}
+					${ad.amount} kg
+					<br/>
+
+					#{if paid}
+						<a href="#${ad.user.uuid}">${ad.user.fullName}</a>
+						<br/>
+						<a href="#${ad.user.uuid}">${ad.user.phone}</a>
+						<br/>
+						<a href="#${ad.user.uuid}">${ad.user.email}</a>
+					#{/if}
+					#{else}
+						 <a href="/pricing">&{'contact'} - &{'paidInfo'} &raquo;</a>
+					#{/else}
+					
+					<br/>
+					<br/>
+					
+				</div>			
+				<div class="span3">
+					<div id="peoplemodule_heading" class="line">
+						<h2 class="toggle-title"><i class="icon-chevron-right"></i> &{'dates'}</h2>
+					</div>
+					&{'ad.published'}
+					${ad.formatDate(ad.published)}					
+					<br/>
+					&{'ad.validTo'}
+					${ad.validTo != null ? ad.formatDate(ad.validTo) : ""}
+					<br/>
+					&{'ad.created'}
+					${ad.formatDate(ad.created)}
+					
+					<br/>
+					<br/>
+
+					<div id="peoplemodule_heading" class="line">
+						<h2 class="toggle-title"><i class="icon-chevron-right"></i> &{'ad.location'}</h2>
+					</div>
+					#{if paid}
+						${ad.locationName}
+						<br/>					
+						&{'ad.distance'}: 
+						${ad.distance} km
+						<br/>					
+						<a href="/search?type=005&x=${ad.locationX}&y=${ad.locationY}&transit=true&distance=150">&{'nearestTransit'}</a>			
+					#{/if}
+					#{else}
+						 <a href="/pricing">&{'paidInfo'} &raquo;</a>
+					#{/else}					
+					
+				</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="padding30">
+				<div id="peoplemodule_heading" class="line">
+					<h2 class="toggle-title"><i class="icon-chevron-right"></i> &{'ad.description'}</h2>
+				</div>					
+				#{if paid}
+					${ad.description}				
+				#{/if}
+				#{else}
+					 <a href="/pricing">&{'paidInfo'} &raquo;</a>
+				#{/else}				
+				</div>
+
+				#{if ad.category != null}
+				<div class="padding30">
+				<div id="peoplemodule_heading" class="line">
+					<h2 class="toggle-title"><i class="icon-chevron-right"></i> &{'interest'}</h2>
+				</div>					
+					 <a href="http://sk.wikipedia.org/w/index.php?title=%C5%A0peci%C3%A1lne%3AH%C4%BEadanie&profile=default&search=&{'ad.category.'+ad.category}&fulltext=Search">&{'wiki'} &raquo;</a>
+					<br/>
+					<br/>
+					<div class="bingwidget" data-type="images" data-query="&{'ad.category.'+ad.category}" data-layout="collage" data-height="281px"  data-color="match" data-safesearch="moderate" data-version="0.9" data-style="border:none;"></div><script type="text/javascript" src="//www.bing.com/widget/bootstrap.js" async></script>
+
+				</div>
+				<br/>					
+				#{/if}
+			</div>			
+			
+			
+			
+			
+			</div>
+			
+			#{if paid}
+				#{set adDetail:true /}
+				#{if !isOwner}
+					#{include 'profile.html' /}	
+					#{if !rated}
+					#{include 'rating.html' /}
+					#{/if}	
+				#{/if}
+			#{/if}
+			
+			#{if ad.auction}
+			<div class="box-container padding30">
+				<a id="auctions" name="auctions"></a>
+				<h2 class="text-error"><div class="hammer"></div> &{'ad.auctionStatus'}</h2>
+				<table id="dsidx-primary-data" class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>&{'user'}</th>
+							<th>&{'ad.offer'}</th>
+							<th>&{'ad.added'}</th>
+							#{if isOwner && ad.expired}
+								<th>&{'actions'}</th>
+							#{/if}
+						</tr>
+					</thead>
+					<tbody>
+						#{list items:auctions, as:'a'}
+						<tr id="dsidx-price">				
+							<td>
+								<i class="icon-user"></i> 
+								#{if (isOwner && a_index == 1 && ad.expired) || (user != null && a.user.uuid == user.uuid) || a.show}
+									<a href="/public-profile?uuid=${a.user.uuid}">${a.user.fullName}</a> 
+								#{/if}
+								#{else}
+									&{'anonymous'}
+								#{/else}
+							</td>
+							<td>${a.offer}</td>
+							<td>${a.formatDate(a.created)}</td>
+							#{if isOwner && ad.expired}
+							<td>
+								#{if (a.show == null || a.show == false) &&  a_index > 1}
+								<a href="/auction-reveal?uuid=${a.uuid}&url=${request.url}">&{'auction.reveal'}</a> 
+								#{/if}
+							</td>
+							#{/if}
+						</tr>
+						#{/list}
+					</tbody>						
+				</table>						
+			</div>
+			#{/if}			
+			
+		</div>
+	</div>
+</div>
+

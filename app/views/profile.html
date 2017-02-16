@@ -1,0 +1,245 @@
+#{if ad}
+	#{set avg:ad.user.avg /}
+  	#{set usr:ad.user /}
+#{/if}
+#{else}
+    #{set avg:user.avg /}
+    #{set usr:user /}
+#{/else}
+    	
+<div class='box-container'>                        
+  <div class='holder row'>                
+  	  #{if usr.avatarUrl}
+	      <img class='span4 overlay' width='800' height='454' src='public/uploads/${usr.avatarUrlSmall}' id="profilePicture" class='attachment-property-regular wp-post-image' alt='23'>
+  	  #{/if}             							 	
+  	  #{else}             							 	
+	      <img class='span4 overlay' width='800' height='454' src='public/my_images/default_avatar.png' id="profilePicture" class='attachment-property-regular wp-post-image' alt='23'>
+  	  #{/else}             							 	
+    
+      <div class='span5 prop-info'>                                
+      
+      #{if !adDetail}
+      <div>
+      	<a href='/edit-profile' ><span style="color:black;font-size:1.2em;margin-bottom:20px" class="pull-right"><i class="icon-pencil"></i></span></a>                                
+		<!-- file upload -->
+		<a href="#" id="upload-button" style="color:black;font-size:1.2em;margin-bottom:20px;margin-right:5px" class="pull-right"><i class="icon-camera"></i></a>
+		<input type="file" id="upload" name="upload" multiple style="display:none" accept="image/*">
+		<input type="hidden" id="temp" name="temp" value="${temp}"/>
+		<script>
+			$(document).ready(function(){
+				$("#upload-button").click(function(){
+				    $("#upload").click();
+				});
+				$("#upload").change(function(){
+				    
+				    // on edit page set ads uuid 
+				    var params = "";
+				    #{if edit}params = "?item=${edit}";#{/if}
+				    #{if temp}params = "?temp=${temp}";#{/if}
+				    
+		    		scrap.uploadFiles('/photoupload'+params, this.files, function(json){
+		    		    var resp = JSON.parse(json);
+		    		    $("#profilePicture").attr("src","public/uploads/"+resp.url);
+		    		});
+				});
+			});
+		</script>
+		<div id="images">
+			#{if files}
+				#{list items:files, as:'file'}
+			        <img class="img-polaroid" style="height:100px;margin-bottom:4px" src="/public/uploads/${file.url}_thumb" alt="${file.name}" title="${file.name}">
+				#{/list}
+			#{/if}
+		</div>
+		<div class="clear"></div>
+		<div id="progresses">
+		</div>
+		<!-- file upload --> 
+
+      </div>
+      <div class="clearfix"></div>
+      #{/if}
+      
+      <h3 class='prop-title'>
+      	#{if user.isAdmin()}
+	      	<a href="/search?keyword=${usr.login}">${usr.fullName}</a> 
+      		<small><span class="label label-info">&{'credit'}: ${usr.account.credit}</span></small>
+      	#{/if}
+    	#{else}
+	      	${usr.fullName} 
+    	#{/else}
+      	
+      	<small class="pull-right">
+		#{if avg >= 1}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+		#{/if}
+		#{if avg >= 2}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+		#{/if}
+		#{if avg >= 3}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+		#{/if}
+		#{if avg >= 4}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+		#{/if}
+		#{if avg >= 5}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+		#{/if}
+		#{if avg < 1}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+		#{/if}
+		#{if avg < 2}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+		#{/if}
+		#{if avg < 3}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+		#{/if}
+		#{if avg < 4}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+		#{/if}
+		#{if avg < 5}
+		<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+		#{/if}      
+      	</small>
+      
+      </h3>
+      <ul class='more-info clearfix'> 
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class="icon-user"></i> &{'login.login'}
+          </span>        
+          <span class='qty pull-right'>${usr.login} 
+          </span>   
+        </li>  			                                             
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class="icon-user"></i> &{'registration.type'}
+          </span>        
+          <span class='qty pull-right'>&{'registration.type.'+usr.account.type} 
+          </span>    
+        </li>            
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class="icon-envelope"></i> &{'email'}
+          </span>        
+          <span class='qty pull-right'><a href="mailto:${usr.email}">${usr.email}</a>
+          </span>   
+        </li>                                                                                  
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class="icon-phone"></i> &{'phone'}
+          </span>        
+          <span class='qty pull-right'>${usr.phone} 
+          </span>   
+        </li>                                                                                  
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class="icon-mobile-phone"></i> &{'cellPhone'}
+          </span>        
+          <span class='qty pull-right'>${usr.cellPhone} 
+          </span>   
+        </li>                 
+        #{if !adDetail}                                                                 
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class='icon-map-marker'></i> &{'your.location'}
+          </span>        
+          <span class='qty pull-right'>
+          	<a target="_blank" href="https://www.google.sk/maps/@${usr.locationY},${usr.locationX},16z">${usr.locationName}</a>
+          </span>   
+        </li>          
+        #{/if}    
+        #{if usr.account.type == "business" }
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class='icon-plus'></i> &{'companyName'}
+          </span>        
+          <span class='qty pull-right'>${usr.account.companyName} 
+          </span>   
+        </li>          
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class='icon-plus'></i>  &{'companyId'}
+          </span>        
+          <span class='qty pull-right'>${usr.account.companyId} 
+          </span>   
+        </li>          
+        <li class='info-label clearfix'>        
+          <span class='pull-left'><i class='icon-plus'></i>  &{'companyTaxId'}
+          </span>        
+          <span class='qty pull-right'>${usr.account.companyTaxId} 
+          </span>   
+        </li>          
+        #{/if}    
+      </ul>   
+    </div> 
+  </div>  
+  
+  <br/>
+  <div style="padding:0px 30px;">
+  	<big><b>&{'review'}</b></big>
+		<ul class='more-info clearfix'> 
+			#{list items:ratings, as:'r'}
+			<li #{if r_index > 3}style="display:none" class="rating-hidden"#{/if} > 
+				<span class="pull-right">
+				#{if r.stars >= 1}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+				#{/if}
+				#{if r.stars >= 2}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+				#{/if}
+				#{if r.stars >= 3}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+				#{/if}
+				#{if r.stars >= 4}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+				#{/if}
+				#{if r.stars >= 5}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star"></i></a>
+				#{/if}
+				#{if r.stars < 1}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+				#{/if}
+				#{if r.stars < 2}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+				#{/if}
+				#{if r.stars < 3}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+				#{/if}
+				#{if r.stars < 4}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+				#{/if}
+				#{if r.stars < 5}
+				<a href="#" style="font-size:2.0em" ><i class="icon-star-empty"></i></a>
+				#{/if}
+				</span>
+				
+				
+				<div>
+				<blockquote>
+				  <p>
+				  	&#132;&{'rating.'+r.reason}. ${r.description}&#148;
+				  	#{if user.isAdmin()}
+						<a class="" href="/rating-delete?uuid=${r.uuid}&url=${request.url}"><span class="label label-inverse"><i class=" icon-remove"></i> &{'delete'}</span></a>
+					#{/if}
+				  </p>
+				  <small><i class="icon-user"></i><a href="/public-profile?uuid=${r.user.uuid}">${r.user.fullName}</a>, ${r.formatDate(r.created)}</small>
+				</blockquote>				
+				</div>
+				
+			</li>       
+			#{/list}
+  		</ul>
+  		<br/>
+  		<div style="text-align:center;padding:20px">
+  			#{if ratings.size > 0}
+  			<a href="#" id="showMoreReviews">&{'show.more'}</a>  
+  			<script>
+  				$(document).ready(function(){
+  				    $("#showMoreReviews").click(function(){
+  				        event.preventDefault();
+  				        $(".rating-hidden").show();
+  				        $(this).hide();
+  				    });
+  				});
+  			</script>
+  			#{/if}
+  			#{else}
+  				&{'no.reviews'}
+  			#{/else}
+  		</div>
+  		<br/>
+  </div>
+</div>

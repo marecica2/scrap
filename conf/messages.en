@@ -1,0 +1,525 @@
+#main.html
+home=Domov
+address=Adresa
+company=Spoločnosť
+about.us=O nás
+blog=Blog
+terms=Obchodné podmienky
+ads=Inzeráty
+services=Služby a poplatky
+contact.us=Kontakt
+call.us=Zavolajte nám
+credit=Kredit
+login=Prihlásiť sa
+logout=Odhlásiť sa
+tagline=Tu nájdete všetko pod jednou strechou
+categories=Kategórie
+all.ads=Všetky inzeráty
+selectUser=Vyberte užívateľa
+onlineChat=Chatuj s Administrátorom
+submit=Odoslať
+manageUsers=Správa užívateľov
+administration=Administrácia
+runCron=Spusti cron
+writeUs=Napíšte nám
+forgot=Zabudol som heslo
+passwordReset=Obnova hesla
+passwordChange=Zmena hesla
+input.password.old=Staré heslo
+captcha=Opíšte text
+admin.offline=Ľutujeme, operátor je práve offline.<br/>Vašu správu môžete odoslať ako email. <a href="/contact">Pokračujte tu</a>
+
+#contact.html
+contact-us=Kontaktujte nás
+contact-us-msg=Kontaktuje nás v prípade akýchkoľvek otázok
+name=Meno
+email-address=Váš email
+subject=Predmet
+message=Správa
+message-sent-error=Odoslanie správy zlyhalo
+message-sent-successfully=Správa bola úspešne odoslaná
+
+#system
+system.profile=Doplňte si prosím <a href='/edit-profile'> kontaktné údaje</a>. Bez vyplnených údajov nebudete môcť využívať niektoré služby ako napr uverejňovanie inzerátov
+system.addcredit=Kredit v hodnote %s bodov bol úspešne pridaný pre užívateľa %s
+system.subcredit=Bol odpočítaný kredit v hodnote %s bodov
+system.invalidcredit=Nesprávna hodnota
+system.settings=Nastavenia uložené
+system.rating=Rating bol zmazaný
+secure.error=Nesprávne prihlasovacie údaje
+secure.blocked=Váš účet bol zablokovaný. Pre odblokovanie <strong><a href="/contact">kontaktujte administrátora</a></strong>.
+secure.logout=Boli ste odhlásení
+system.newpassword=Na Váš email Vám boli odoslané nové registračné údaje
+system.password.subject=Obnova hesla
+system.password.body=<p>Vaše heslo bolo obnovené.</p><p>Nové heslo: %s </p>
+system.bidsuccess=Ponuka úspešne pridaná
+system.adsuccess=Inzerát úspešne zobrazený
+system.nocredit=Nedostatočný kredit
+system.nocredit.limit=Pre zúčastnenie v aukcii je potrebný kredit min %s. Týmto krokom sa snažíme o to, aby sa aukcii zúčastňovali len seriózni obchodníci.
+system.invalid=Nesprávna hodnota
+system.adpublished=Inzerát bol úspešne publikovaný.
+system.invalidAd=Pred publikovaním upravte údaje o inzeráte
+
+
+#rating.html
+delete=Zmazať
+yourRating=Vaše hodnotenie
+ownRating=Vlastné hodnotenie
+satisfied=Vyjadrite Vašu spokojnosť
+unsatisfied=Vyjadrite Vašu nespokojnosť
+rating1=Som maximálne spokojný
+rating2=Rýchla dohoda
+rating3=Som spokojný
+rating4=Nepravdivé údaje
+rating5=Neozval sa
+rating6=Nedodal tovar
+
+
+ 
+ 
+#validation
+validation.required=Povinný údaj
+validation.password=Nesprávne heslo
+validation.passwordMatch=Heslá sa nezhodujú
+validation.login=Login nieje v tvare emailu
+validation.invalidPassword=Nesprávne heslo
+validation.account=Login už existuje
+
+
+ 
+day=deň
+days=dní
+days1=dni
+ 
+hour=hodina
+hours=hodín
+hours1=hodiny
+ 
+minute=minúta
+minutes=minút
+minutes1=minúty
+ 
+second=sekunda
+seconds=sekúnd
+seconds1=sekundy
+ 
+unauthorized=Neautorizovaný prístup
+resourceNotFound=Nenašlo sa
+internalError=Vyskytla sa chyba
+ 
+#login.html
+log.in=Prihlásiť sa
+input.login=Prihlasovacie meno
+input.password=Prihlasovacie heslo
+login.question=Ešte nemáte účet?
+login.register=Zaregistrujte sa tu.
+ 
+#favorites.html
+favoriteAds=Obľúbené inzeráty
+add=Pridať
+remove=Odobrať
+ad=Inzerát
+actions=Možnosti
+ 
+#events.html
+buy.credit=Kúpa kreditu
+buy.credit.msg=Kredit si zakúpite prostredíctvom bankového prevodu. V tejto sekcii sú vyplnené všetky potrebné údaje pre úspešné realizovanie prevodu. Nezabudnite vyplniť variabilný symbol v tvare Vášho prihlasovacieho loginu. Ten je potrebný pre spárovanie platby s Vaším účtom. O aktualizácii kreditu budete hneď po prijatí platby budete emailom. Aktuálny cenník služieb nájdete <a href="/pricing">tu</a>.
+event.001=Otvorenie inzerátu
+event.002=Otvorenie inzerátu
+event.003=Pridanie ponuky v aukcii
+event.004=Dobitie kreditu
+bank.account=Číslo účtu
+bank.vs=Variabilný symbol
+bank.ks=Konštantný symbol
+bank.msg=Správa pre príjemcu
+bank.msg.1=Úhrada kreditu
+bank.owner=Príjemca
+
+
+ 
+notify.day=Every day at %s
+notify.seconds=Every %s seconds
+notify.minutes=Every %s minutes
+notify.hours=Every %s hours
+notify.hour=Every %s hour
+ 
+#registration.html
+invalid.captcha=Nesprávny text
+registration.personal=Registrácia - osobný účet
+registration.business=Registrácia - firma
+registration.personalDetails=Osobné údaje
+registration.accountDetails=Údaje o spoločnosti
+registration.type=Typ registrácie
+registration.type.personal=Súkromná osoba
+registration.type.business=Firma
+registration.login=Prihlasovacie meno v tvare emailu
+input.first=Krstné meno
+input.last=Priezvisko
+input.password=Heslo
+input.password.repeat=Potvrdenie hesla
+register=Odoslať
+cancel=Zrušiť
+phone=Tel.
+cellPhone=Mobil
+fax=Fax
+email=Email
+companyName=Názov spoločnosti
+companyId=IČO spoločnosti
+companyTaxId=DIČ spoločnosti
+billingAddressStreet=Ulica
+billingAddressCity=Mesto
+billingAddressState=Krajina
+usrPhone=Telefón
+usrCellPhone=Mobil
+usrFax=Fax
+usrEmail=Email
+save=Uložiť
+profile=Uživateľský profil
+contact=Kontaktné údaje
+registration-msg=Registrácia prebehla úspešne. Na vašu emailovú adresu Vám boli odoslané registračné údaje.
+registration-subject=Vaš účet bol úspešne vytvorený
+registration-email=Dobrý deň, <br/>Boli ste úspešne zaregistrovaný na portáli STI. Vaše prihlasovacie údaje:<ul><li>Login: %s</li><li>Heslo: %s</li></ul>
+
+ 
+#profile.html
+login.login=Prihlasovacie meno
+review=Hodnotenie dodávateľa
+show.more=Zobraziť všetky hodnotenia
+no.reviews=Zatiaľ žiadne hodnotenia
+on.time=v čase
+your.location=Vaša poloha
+ 
+rating.1=Som maximálne spokojný
+rating.2=Rýchla dohoda
+rating.3=Som spokojný
+rating.4-Nepravdivé údaje
+rating.5-Neodpovedal
+rating.6-Nedodal tovar
+ 
+ 
+#index.html
+welcome=Vitajte v portáli STI
+motivation1=STI je spoločnosť zaoberajúca sa spravovaním informácii o šrote a všetkých súvisiacich činnostiach
+motivation2=Neváhajte a zaregistrujte sa už dnes.
+login=Prihlásenie
+registration=Registrácia
+my.account=Môj účet
+registration.now=Zaregistrujte sa teraz!
+newest.ads=Najnovšie inzeráty
+display.all.ads=Zobraziť všetky
+added=Pridane
+why.us=Prečo si vybrať nás
+why.us.text=Pretože sme jediní na trhu. Lorem ipsum dolor sit amet consectetur incididunt ut labore et dolore magna aliqua adipisicing elit seddo eiusmod tempor.
+Sed perspiciatis unde omnisiste natus error voluptatem remopa accusantium doloremque laudantium, totam rem aperiam.
+feature.1=Vytvorene pre Vás biznis
+feature.1.text=Blabla ut labore et dolore magna aliqua adipisicing elit seddo eiusmod
+feature.2=Šetríme Vám čas
+feature.2.text=Lorem ipsum dolor sit amet consectetur incididunt ut labore et dolore magna elit seddo eiusmod
+feature.3=Šetríme Vám náklady
+feature.3.text=Lorem ipsum dolor sit ameto eiusmod
+feature.4=Všetko pod jednou strechou
+feature.4.text=Lorem ipsum dolor sit amet consectemagna aliqua adipisicing elit seddo eiusmod
+actualAuctions=Prebiehajúce aukcie
+viewAll=Zobraziť všetky
+moreInfo=Viac o ponuke
+continue=Pokračovať
+ 
+#lme.html
+note1=Dôležité upozornenie!
+note2=Pokiaľ je táto stránka otvorená a nezastavite automatickú obnovu, odpočítava sa Vám kredit
+frequency=Frekvencia obnovenia
+stop=Stop
+refresh=Obnoviť
+ 
+#cross pages
+showMore=Viac
+paidInfo=Spoplatnená služba
+paidInformation=Spoplatnená služba. Zobraziť cenník
+loginToShow=Prihlásiť sa
+nearestTransit=Najbližší dopravca
+interest=Zaujímavosti
+wiki=O komodite na Wikipédii
+ 
+#actionPanel.html
+myAds=Moje inzeráty
+favoriteAds=Označené inzeráty
+editProfile=Upraviť profil
+newAd=Nový inzerát
+notifications=Správa notifikácii
+buyCredit=Prehľad platieb
+ 
+#notifications.html
+enable=Povoliť notifikácie
+disable=Zakázať notifikácie
+notificationSubject=Predmet oznámenia
+notificationType=Spôsob oznámenia
+notificationSms=Sms
+notificationEmail=Email
+notificationTime=Čas notifikácie
+notificationHours=Čas notifikácie
+notificationDays=Oznámenie v tieto dni
+monday=Pondelok
+tuesday=Utorok
+wednesday=Streda
+thursday=Štvrtok
+friday=Piatok
+saturday=Sobota
+sunday=Nedeľa
+ 
+#profile.html
+addCredit=Pridať kredit
+credit.added=Pripočítaný kredit
+credit.added.msg=Vaša úhrada prebehla úspešne. Na Váš účet bol pripočítaný kredit v hodnote %s kreditov. Aktuálny stav je %s kreditov.
+ 
+#adForm.html
+upload.photos=Nahrať fotografie
+amount=Množstvo
+price=Cena
+description=Popis
+location=Poloha
+selectType=Vyberte typ
+selectCategory=Vyberte kategóriu
+selectSubCategory=Vyberte podkategóriu
+buy=Dopyt
+sell=Ponuka
+priceFrom=Cena od
+priceTo=Cena do
+amountFrom=Množstvo od
+amountTo=Množstvo do
+searchKeyword=Kľúčové slovo
+searchDistance=Vzdialenosť (km)
+setYourPosition=Nastavenie polohy
+ 
+ 
+#adlist.html
+search=Vyhľadávanie
+search1=Hľadať
+reset=Vymazať formulár
+timeasc=Od najstaršieho
+timedesc=Od najnovšieho
+priceasc=Od najlacnejšieho
+pricedesc=Od najdrahšieho
+amountasc=Podľa množstva vzostupne
+amountdesc=Podľa množstva zostupne
+sortedBy=Zoradiť
+moreResults=Viac výsledkov
+search.results=Výsledky vyhľadávania
+ 
+ 
+#ad.html
+#email
+all=všetko
+ad.email.template.subject=Najnovšie udalosti
+ad.email.header=Najnovšie udalosti
+ad.email.newAd=Zverejnený inzerát
+ad.email.auction=Pridaná ponuka v aukcii
+ad.email.intime=V čase:
+ad.email.offer=Ponuka
+ad.email.offer=Ponuka
+location.paid=Presná poloha sa zobrazí až po odkrytí.
+photos.paid=Fotografie sa zobrazia až po odkrytí
+photos.count=Počet fotografií
+
+
+dates=Dátumy
+anonymous=Anonym
+reveal.ad=Odkryť inzerát
+auction.reveal=Odkryť
+auction.begin=Začať aukciu
+auction.end=Ukončiť aukciu
+ad.publish=Publikuj inzerát
+ad.unpublish=Ukonči inzerát
+edit=Upraviť
+ad.offer=Ponuka
+ad.added=Pridané
+user=Užívateľ
+ad.auctionStatus=Priebeh aukcie
+ad.created=Vytvorené
+ad.published=Publikované
+ad.validTo=Platnosť do
+ad.distance=Vzdialenosť
+ad.location=Poloha
+ad.description=Podrobný popis
+ad.details=Podrobnosti
+ad.auction.add=Prihodit
+ad.auction.price=Vyvolávacia cena
+ad.auction.maxoffer=Najvyššia ponuka
+auction.end=Koniec aukcie
+auction.offers=Počet ponúk
+view.offers=Zobraziť všetky ponuky
+ad.auction.ended=Aukcia neaktívna
+ad.auction.running=Aukcia práve prebieha
+added=Pridané
+ad.expired=Ukončená platnosť
+ad.end=Koniec
+ad.sell=Ponuka
+ad.buy=Dopyt
+ad.type=Typ
+ad.category=Kategória
+ad.subcategory=Podkategória
+ad.price=Cena
+ad.amount=Množstvo
+ad.url=Odkaz na inzerát
+ad.state=Stav
+ad.valid=Prebieha
+ad.expired=Ukončený
+ 
+ad.pricetype.001=Inzerát
+ad.pricetype.002=Aukcia
+ 
+ad.state.001=Nepublikovaný
+ad.state.002=Publikovaný
+ad.state.003=Ukončená platnosť
+ 
+ad.type.001=Kovový šrot
+ad.type.002=Zmiešaný šrot
+ad.type.003=Likvidácia
+ad.type.004=Použitý stroj
+ad.type.005=Doprava
+ad.type.006=Ponuka práce
+ 
+ad.category.001=Hliník
+ad.category.002=Hliník sekundárny
+ad.category.003=Meď
+ad.category.004=Bronz
+ad.category.005=Mosadz
+ad.category.006=Olovo
+ad.category.007=Zinok
+ad.category.008=Cín
+ad.category.009=Legovaný odpad nerez
+ad.category.010=Ostatné kovy
+ 
+ad.subcategory.001001=Aluminium primárny
+ad.subcategory.001002=AlMgSi 0,5 profily lesklé,nové
+ad.subcategory.001003=Al plech 99,5 nový
+ad.subcategory.001004=AlMg profily lakované
+ad.subcategory.001005=Al drát 99,5 nový
+ad.subcategory.001006=Al drát 99,5 oxidovaný
+ad.subcategory.001007=Al pasnice
+ad.subcategory.001008=Al kovolisty
+ad.subcategory.001009=AlSi 1 profily
+ad.subcategory.001010=AlMg plechy nové,lesklé
+ad.subcategory.001011=AlMg plechy s fóliou
+ad.subcategory.001012=AlMg výseky nové
+ad.subcategory.001013=AlMg3
+ad.subcategory.001014=AlMn odpad
+ 
+ad.subcategory.002001=AlMgSi 0,5 profily s PVC staré
+ad.subcategory.002002=AlMgSi 0,5 profily s PVC nové
+ad.subcategory.002003=Al plechy nové
+ad.subcategory.002004=Al plechy lakované(mix)
+ad.subcategory.002005=Al plechy s 2&#37;Fe
+ad.subcategory.002006=Lamely z Al chladičov
+ad.subcategory.002007=Al Cu chladiče s Fe
+ad.subcategory.002008=Al liaty bez Fe(nový+starý)
+ad.subcategory.002009=Al liaty 2&#37;
+ad.subcategory.002010=Al disky
+ad.subcategory.002011=Al kusový
+ad.subcategory.002012=Al triesky
+ad.subcategory.002013=Al fólie
+ad.subcategory.002014=Al Fe laná
+ad.subcategory.002015=Al káble
+ad.subcategory.002016=Al rafinacia
+ad.subcategory.002017=Al “sendvič” plechy
+ad.subcategory.002018=Al značky
+ad.subcategory.002019=Al žalúzie
+ad.subcategory.002020=Al fľašové uzávery
+ad.subcategory.002021=Al plechovky
+ad.subcategory.002022=Iné
+ 
+ad.subcategory.003001=Cu katody
+ad.subcategory.003002=Cu drát nový,lesklý
+ad.subcategory.003003=Cu granulát
+ad.subcategory.003004=Cu pocinovana
+ad.subcategory.003005=Cu drát zelený
+ad.subcategory.003006=Cu pasnice lesklé
+ad.subcategory.003007=Cu pasnice lakované
+ad.subcategory.003008=Cu drát holý
+ad.subcategory.003009=Cu plech,trúbky nové
+ad.subcategory.003010=Cu kusová ťažka
+ad.subcategory.003011=Cu poniklovaná
+ad.subcategory.003012=Cu postriebrená
+ad.subcategory.003013=Cu Raff 95&#37;
+ad.subcategory.003014=Cu “kanál” drát
+ad.subcategory.003015=Cu drát lakovaný
+ad.subcategory.003016=Cu ľahká
+ad.subcategory.003017=Cu cievky
+ad.subcategory.003018=Cu triesky
+ad.subcategory.003019=Cu Wicu-trúbky
+ad.subcategory.003020=Cu trafa
+ad.subcategory.003021=Cu Ms chladiče
+ad.subcategory.003022=Cu káble
+ad.subcategory.003023=Cu káble s PVC
+ad.subcategory.003024=Cu káble k lupaniu
+ad.subcategory.003025=Cu zemné káble
+ad.subcategory.003026=Cu káble mastné
+ad.subcategory.003027=Cu drát s papierom
+ad.subcategory.003028=Elektromotory
+ad.subcategory.003029=Chladničkové motory
+ad.subcategory.003030=Iné
+ 
+ad.subcategory.004001=Bronz červený a triesky
+ad.subcategory.004002=Bronz cínový kusový
+ad.subcategory.004003=Bronz cínový valcovaný
+ad.subcategory.004004=Bronz magnetický
+ad.subcategory.004005=Bz Ms triesky
+ad.subcategory.004006=Iné
+ 
+ad.subcategory.005001=Ms kohútiková
+ad.subcategory.005002=Ms 63
+ad.subcategory.005003=Ms 58
+ad.subcategory.005004=Ms kondenzačné trúbky
+ad.subcategory.005005=Ms 58 triesky čisté
+ad.subcategory.005006=Ms nábojnice
+ad.subcategory.005007=Ms "Kartuschen"
+ad.subcategory.005008=Alpaka
+ad.subcategory.005009=Tombak
+ad.subcategory.005010=Ms triesky mix
+ad.subcategory.005011=Ms rafinačka
+ad.subcategory.005012=Iné
+ 
+ad.subcategory.006001=Pb odpad starý
+ad.subcategory.006002=Vyvažovacie olovka
+ad.subcategory.006003=Pb mašle
+ad.subcategory.006004=Tlačiarenské olovo
+ad.subcategory.006005=Pb guľky,diabolky,broky
+ad.subcategory.006006=Pb batérie
+ad.subcategory.006007=Iné
+ 
+ad.subcategory.007001=Zn odpad nový
+ad.subcategory.007002=Zn odpad starý
+ad.subcategory.007003=Zn zliatina nová,bez Fe
+ad.subcategory.007004=Zn zliatina stará s Fe
+ad.subcategory.007005=Zn vyvážovacie závažia
+ad.subcategory.007006=Iné
+ 
+ad.subcategory.008001=Sn čistý
+ad.subcategory.008002=Sn pájka
+ad.subcategory.008003=Sn stery
+ad.subcategory.008004=Iné
+ 
+ad.subcategory.009001=Cr odpad
+ad.subcategory.009002=Cr triesky
+ad.subcategory.009003=Cr/Ni 18/8
+ad.subcategory.009004=Cr/Ni 18/8 triesky
+ad.subcategory.009005=Cr/Ni/Mo 18/10/2
+ad.subcategory.009006=Cr/Ni/Mo 18/10/2 triesky
+ad.subcategory.009007=Ni odpad
+ad.subcategory.009008=NCT odpad
+ad.subcategory.009009=Iné
+ 
+ad.subcategory.010001=Magnezium
+ad.subcategory.010002=Ti odpad
+ad.subcategory.010003=Ti triesky
+ad.subcategory.010004=Tvrdokov
+ad.subcategory.010005=Niresist
+ad.subcategory.010006=NI Zliatiny
+ad.subcategory.010007=Katalyzátory
+ad.subcategory.010008=Molybdén
+ad.subcategory.010009=Wolfrám
+ad.subcategory.010010=Iné
+ 
+country.Slovakia=Slovenská republika
+country.Poland=Poľsko
+country.Hungary=Maďarsko
+country.Czech Republic=Česká republika

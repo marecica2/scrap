@@ -1,0 +1,51 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div class="container">
+	<div class="row">
+		#{include 'actionPanel.html' /}
+		<div class="span9">
+			<div class="box-container padding30">  
+				<h2>&{'buy.credit'}</h2>
+				
+				<p>&{'buy.credit.msg'}</p>
+				<form action="">
+					<div class="form-group">
+						<label><strong>&{'bank.account'}</strong></label>
+						<input type="text"  class="span8" id="companyName" name="" value="SKUBAX000203292990999" readonly="readonly" placeholder="&{'bank.account'}"/>
+					</div>				
+					<div class="row">
+						<div class="span4">
+							<div class="form-group">
+								<label><strong>&{'bank.vs'}</strong></label>
+								<input type="text"  class="span4" id="companyName" name="" value="${user.login}" readonly="readonly" placeholder="&{'bank.account'}"/>
+							</div>				
+						</div>				
+						<div class="span4">
+							<div class="form-group">
+								<label><strong>&{'bank.ks'}</strong></label>
+								<input type="text"  class="span4" id="companyName" name="" value="1443" readonly="readonly" placeholder="&{'bank.ks'}"/>
+							</div>				
+						</div>				
+					</div>
+					<div class="form-group">
+						<label><strong>&{'bank.msg'}</strong></label>
+						<input type="text"  class="span8" id="companyName" name="" value="&{'bank.msg.1'}" readonly="readonly" placeholder="&{'bank.msg.1'}"/>
+					</div>						
+				</form>
+				
+				
+				<h4>&{'bank.owner'}</h4>
+				<address>
+					<strong><a href="http://sticorp.sk/kontakt/">STI Corp, s.r.o.</a></strong><br> 
+					Mlynská 28, 04001, Košice<br>
+					Slovak republic, SK<br> 
+					<i class="icon-phone"></i> (+421) 944 025 930
+				</address>
+
+				#{include 'events.html' /}				
+			</div>		
+		</div>
+	</div>
+</div>
+

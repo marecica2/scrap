@@ -1,0 +1,317 @@
+	<div class="form-group">
+		<div class="pull-left">
+			<label class="radio" style="margin-right:10px">
+				<input type="radio" name="buySell" value="sell" #{if params.buySell == "sell"} checked="checked" #{/if}> &{'sell'}
+			</label> 
+		</div>
+		<div class="pull-left" style="margin-right:10px">
+			<label class="radio">
+				<input type="radio" name="buySell" value="buy" #{if params.buySell == "buy"} checked="checked" #{/if}> &{'buy'}
+			</label>
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<div class="form-group">
+		<div class="pull-left">
+			<label class="radio" style="margin-right:10px">
+				<input type="radio" name="priceType" value="001" #{if params.priceType == "001"} checked="checked" #{/if}> &{'ad.pricetype.001'}
+			</label> 
+		</div>
+		<div class="pull-left">
+			<label class="radio" style="margin-right:10px">
+				<input type="radio" name="priceType" value="002" #{if params.priceType == "002"} checked="checked" #{/if}> &{'ad.pricetype.002'}
+			</label>
+		</div>
+	</div>
+	
+	<br/>
+	<br/>
+
+	<select class="span5" name="type" id="type" data-type="type" autofocus="autofocus">
+		<option value="" >-- &{'selectType'} --</option>
+		<option value="001" #{if params.type == "001"} selected="selected" #{/if}>&{'ad.type.001'}</option>
+		<option value="002" #{if params.type == "002"} selected="selected" #{/if}>&{'ad.type.002'}</option>
+		<option value="003" #{if params.type == "003"} selected="selected" #{/if}>&{'ad.type.003'}</option>
+		<option value="004" #{if params.type == "004"} selected="selected" #{/if}>&{'ad.type.004'}</option>
+		<option value="005" #{if params.type == "005"} selected="selected" #{/if}>&{'ad.type.005'}</option>
+		<option value="006" #{if params.type == "006"} selected="selected" #{/if}>&{'ad.type.006'}</option>
+	</select>
+	<div class="error">#{error 'type' /}</div>
+	
+	<script>
+		jQuery.expr[':'].regex = function(elem, index, match) {
+		    var matchParams = match[3].split(','),
+		        validLabels = /^(data|css):/,
+		        attr = {
+		            method: matchParams[0].match(validLabels) ? 
+		                        matchParams[0].split(':')[0] : 'attr',
+		            property: matchParams.shift().replace(validLabels,'')
+		        },
+		        regexFlags = 'ig',
+		        regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
+		    return regex.test(jQuery(elem)[attr.method](attr.property));
+		}
+	
+		$(document).ready(function(){
+		    $('option:regex(value,00[0-9][0-9][0-9][0-9])').hide();
+		    
+		    // by default show first category 
+		    if($("#type").val() == "001")
+	            $("#001").show();
+		    
+		    $("#type").change(function(){
+		        var selected = $(this).find(":selected").val();
+		        if(selected == "001"){
+		            $("#001").show();
+		        } else {
+		            $("#001").hide();
+		        }
+		    });		        
+		    
+		    
+		    var generateOptions = function(){
+		        var selected = $(this).find(":selected").val();
+	            var elms = $('option:regex(value,'+selected+'[0-9][0-9][0-9])');
+	            $('#subCategory').html("<option value=''>-- "+i18n("selectSubCategory")+" --</option>");
+	            $.each(elms, function() {
+	                $('#subCategory').append($("<option/>", {
+	                    value: $(this).attr("value"),
+	                    text: $(this).text()
+	                }));
+	            });
+		        $("#subCategory").prop('selectedIndex',0);	        
+		    }
+		    
+		    $("#category").change(generateOptions);
+		    $("#category").change();
+		    $("#subCategory").val("${params.subCategory}");
+		});
+	</script>
+
+<div id="001" style="display:none;">
+	<select class="span5" name="category" id="category" data-type="personal" autofocus="autofocus">
+		<option value="" >-- &{'selectCategory'} --</option>
+		<option value="001" #{if params.category == "001"} selected="selected" #{/if}>&{'ad.category.001'}</option>
+		<option value="002" #{if params.category == "002"} selected="selected" #{/if}>&{'ad.category.002'}</option>
+		<option value="003" #{if params.category == "003"} selected="selected" #{/if}>&{'ad.category.003'}</option>
+		<option value="004" #{if params.category == "004"} selected="selected" #{/if}>&{'ad.category.004'}</option>
+		<option value="005" #{if params.category == "005"} selected="selected" #{/if}>&{'ad.category.005'}</option>
+		<option value="006" #{if params.category == "006"} selected="selected" #{/if}>&{'ad.category.006'}</option>
+		<option value="007" #{if params.category == "007"} selected="selected" #{/if}>&{'ad.category.007'}</option>
+		<option value="008" #{if params.category == "008"} selected="selected" #{/if}>&{'ad.category.008'}</option>
+		<option value="009" #{if params.category == "009"} selected="selected" #{/if}>&{'ad.category.009'}</option>
+		<option value="010" #{if params.category == "010"} selected="selected" #{/if}>&{'ad.category.010'}</option>
+	</select>
+	<div class="error">#{error 'category' /}</div>
+	
+	
+	<select id="backup" style="display:none;">
+		<option value="001001" #{if params.subCategory == "001001"} selected="selected" #{/if}>&{'ad.subcategory.001001'}</option>
+		<option value="001002" #{if params.subCategory == "001002"} selected="selected" #{/if}>&{'ad.subcategory.001002'}</option>
+		<option value="001003" #{if params.subCategory == "001003"} selected="selected" #{/if}>&{'ad.subcategory.001003'}</option>
+		<option value="001004" #{if params.subCategory == "001004"} selected="selected" #{/if}>&{'ad.subcategory.001004'}</option>
+		<option value="001005" #{if params.subCategory == "001005"} selected="selected" #{/if}>&{'ad.subcategory.001005'}</option>
+		<option value="001006" #{if params.subCategory == "001006"} selected="selected" #{/if}>&{'ad.subcategory.001006'}</option>
+		<option value="001007" #{if params.subCategory == "001007"} selected="selected" #{/if}>&{'ad.subcategory.001007'}</option>
+		<option value="001008" #{if params.subCategory == "001008"} selected="selected" #{/if}>&{'ad.subcategory.001008'}</option>
+		<option value="001009" #{if params.subCategory == "001009"} selected="selected" #{/if}>&{'ad.subcategory.001009'}</option>
+		<option value="001010" #{if params.subCategory == "001010"} selected="selected" #{/if}>&{'ad.subcategory.001010'}</option>
+		<option value="001011" #{if params.subCategory == "001011"} selected="selected" #{/if}>&{'ad.subcategory.001011'}</option>
+		<option value="001012" #{if params.subCategory == "001012"} selected="selected" #{/if}>&{'ad.subcategory.001012'}</option>
+		<option value="001013" #{if params.subCategory == "001013"} selected="selected" #{/if}>&{'ad.subcategory.001013'}</option>
+		<option value="001014" #{if params.subCategory == "001014"} selected="selected" #{/if}>&{'ad.subcategory.001014'}</option>
+		
+		<option value="002001" #{if params.subCategory == "002001"} selected="selected" #{/if}>&{'ad.subcategory.002001'}</option>
+		<option value="002002" #{if params.subCategory == "002002"} selected="selected" #{/if}>&{'ad.subcategory.002002'}</option>
+		<option value="002003" #{if params.subCategory == "002003"} selected="selected" #{/if}>&{'ad.subcategory.002003'}</option>
+		<option value="002004" #{if params.subCategory == "002004"} selected="selected" #{/if}>&{'ad.subcategory.002004'}</option>
+		<option value="002005" #{if params.subCategory == "002005"} selected="selected" #{/if}>&{'ad.subcategory.002005'}</option>
+		<option value="002006" #{if params.subCategory == "002006"} selected="selected" #{/if}>&{'ad.subcategory.002006'}</option>
+		<option value="002007" #{if params.subCategory == "002007"} selected="selected" #{/if}>&{'ad.subcategory.002007'}</option>
+		<option value="002008" #{if params.subCategory == "002008"} selected="selected" #{/if}>&{'ad.subcategory.002008'}</option>
+		<option value="002009" #{if params.subCategory == "002009"} selected="selected" #{/if}>&{'ad.subcategory.002009'}</option>
+		<option value="002010" #{if params.subCategory == "002010"} selected="selected" #{/if}>&{'ad.subcategory.002010'}</option>
+		<option value="002011" #{if params.subCategory == "002011"} selected="selected" #{/if}>&{'ad.subcategory.002011'}</option>
+		<option value="002012" #{if params.subCategory == "002012"} selected="selected" #{/if}>&{'ad.subcategory.002012'}</option>
+		<option value="002013" #{if params.subCategory == "002013"} selected="selected" #{/if}>&{'ad.subcategory.002013'}</option>
+		<option value="002014" #{if params.subCategory == "002014"} selected="selected" #{/if}>&{'ad.subcategory.002014'}</option>
+		<option value="002015" #{if params.subCategory == "002015"} selected="selected" #{/if}>&{'ad.subcategory.002015'}</option>
+		<option value="002016" #{if params.subCategory == "002016"} selected="selected" #{/if}>&{'ad.subcategory.002016'}</option>
+		<option value="002017" #{if params.subCategory == "002017"} selected="selected" #{/if}>&{'ad.subcategory.002017'}</option>
+		<option value="002018" #{if params.subCategory == "002018"} selected="selected" #{/if}>&{'ad.subcategory.002018'}</option>
+		<option value="002019" #{if params.subCategory == "002019"} selected="selected" #{/if}>&{'ad.subcategory.002019'}</option>
+		<option value="002020" #{if params.subCategory == "002020"} selected="selected" #{/if}>&{'ad.subcategory.002020'}</option>
+		<option value="002021" #{if params.subCategory == "002021"} selected="selected" #{/if}>&{'ad.subcategory.002021'}</option>
+		<option value="002022" #{if params.subCategory == "002022"} selected="selected" #{/if}>&{'ad.subcategory.002022'}</option>
+		
+		<option value="003001" #{if params.subCategory == "003001"} selected="selected" #{/if}>&{'ad.subcategory.003001'}</option>
+		<option value="003002" #{if params.subCategory == "003002"} selected="selected" #{/if}>&{'ad.subcategory.003002'}</option>
+		<option value="003003" #{if params.subCategory == "003003"} selected="selected" #{/if}>&{'ad.subcategory.003003'}</option>
+		<option value="003004" #{if params.subCategory == "003004"} selected="selected" #{/if}>&{'ad.subcategory.003004'}</option>
+		<option value="003005" #{if params.subCategory == "003005"} selected="selected" #{/if}>&{'ad.subcategory.003005'}</option>
+		<option value="003006" #{if params.subCategory == "003006"} selected="selected" #{/if}>&{'ad.subcategory.003006'}</option>
+		<option value="003007" #{if params.subCategory == "003007"} selected="selected" #{/if}>&{'ad.subcategory.003007'}</option>
+		<option value="003008" #{if params.subCategory == "003008"} selected="selected" #{/if}>&{'ad.subcategory.003008'}</option>
+		<option value="003009" #{if params.subCategory == "003009"} selected="selected" #{/if}>&{'ad.subcategory.003009'}</option>
+		<option value="003010" #{if params.subCategory == "003010"} selected="selected" #{/if}>&{'ad.subcategory.003010'}</option>
+		<option value="003011" #{if params.subCategory == "003011"} selected="selected" #{/if}>&{'ad.subcategory.003011'}</option>
+		<option value="003012" #{if params.subCategory == "003012"} selected="selected" #{/if}>&{'ad.subcategory.003012'}</option>
+		<option value="003013" #{if params.subCategory == "003013"} selected="selected" #{/if}>&{'ad.subcategory.003013'}</option>
+		<option value="003014" #{if params.subCategory == "003014"} selected="selected" #{/if}>&{'ad.subcategory.003014'}</option>
+		<option value="003015" #{if params.subCategory == "003015"} selected="selected" #{/if}>&{'ad.subcategory.003015'}</option>
+		<option value="003016" #{if params.subCategory == "003016"} selected="selected" #{/if}>&{'ad.subcategory.003016'}</option>
+		<option value="003017" #{if params.subCategory == "003017"} selected="selected" #{/if}>&{'ad.subcategory.003017'}</option>
+		<option value="003018" #{if params.subCategory == "003018"} selected="selected" #{/if}>&{'ad.subcategory.003018'}</option>
+		<option value="003019" #{if params.subCategory == "003019"} selected="selected" #{/if}>&{'ad.subcategory.003019'}</option>
+		<option value="003020" #{if params.subCategory == "003020"} selected="selected" #{/if}>&{'ad.subcategory.003020'}</option>
+		<option value="003021" #{if params.subCategory == "003021"} selected="selected" #{/if}>&{'ad.subcategory.003021'}</option>
+		<option value="003022" #{if params.subCategory == "003022"} selected="selected" #{/if}>&{'ad.subcategory.003022'}</option>		
+		<option value="003023" #{if params.subCategory == "003023"} selected="selected" #{/if}>&{'ad.subcategory.003023'}</option>		
+		<option value="003024" #{if params.subCategory == "003024"} selected="selected" #{/if}>&{'ad.subcategory.003024'}</option>		
+		<option value="003025" #{if params.subCategory == "003025"} selected="selected" #{/if}>&{'ad.subcategory.003025'}</option>		
+		<option value="003026" #{if params.subCategory == "003026"} selected="selected" #{/if}>&{'ad.subcategory.003026'}</option>		
+		<option value="003027" #{if params.subCategory == "003027"} selected="selected" #{/if}>&{'ad.subcategory.003027'}</option>		
+		<option value="003028" #{if params.subCategory == "003028"} selected="selected" #{/if}>&{'ad.subcategory.003028'}</option>		
+		<option value="003029" #{if params.subCategory == "003029"} selected="selected" #{/if}>&{'ad.subcategory.003029'}</option>		
+		<option value="003030" #{if params.subCategory == "003030"} selected="selected" #{/if}>&{'ad.subcategory.003030'}</option>	
+		
+		<option value="004001" #{if params.subCategory == "004001"} selected="selected" #{/if}>&{'ad.subcategory.004001'}</option>
+		<option value="004002" #{if params.subCategory == "004002"} selected="selected" #{/if}>&{'ad.subcategory.004002'}</option>
+		<option value="004003" #{if params.subCategory == "004003"} selected="selected" #{/if}>&{'ad.subcategory.004003'}</option>
+		<option value="004004" #{if params.subCategory == "004004"} selected="selected" #{/if}>&{'ad.subcategory.004004'}</option>
+		<option value="004005" #{if params.subCategory == "004005"} selected="selected" #{/if}>&{'ad.subcategory.004005'}</option>
+		<option value="004006" #{if params.subCategory == "004006"} selected="selected" #{/if}>&{'ad.subcategory.004006'}</option>
+		
+		<option value="005001" #{if params.subCategory == "005001"} selected="selected" #{/if}>&{'ad.subcategory.005001'}</option>
+		<option value="005002" #{if params.subCategory == "005002"} selected="selected" #{/if}>&{'ad.subcategory.005002'}</option>
+		<option value="005003" #{if params.subCategory == "005003"} selected="selected" #{/if}>&{'ad.subcategory.005003'}</option>
+		<option value="005004" #{if params.subCategory == "005004"} selected="selected" #{/if}>&{'ad.subcategory.005004'}</option>
+		<option value="005005" #{if params.subCategory == "005005"} selected="selected" #{/if}>&{'ad.subcategory.005005'}</option>
+		<option value="005006" #{if params.subCategory == "005006"} selected="selected" #{/if}>&{'ad.subcategory.005006'}</option>
+		<option value="005007" #{if params.subCategory == "005007"} selected="selected" #{/if}>&{'ad.subcategory.005007'}</option>
+		<option value="005008" #{if params.subCategory == "005008"} selected="selected" #{/if}>&{'ad.subcategory.005008'}</option>
+		<option value="005009" #{if params.subCategory == "005009"} selected="selected" #{/if}>&{'ad.subcategory.005009'}</option>
+		<option value="005010" #{if params.subCategory == "005010"} selected="selected" #{/if}>&{'ad.subcategory.005010'}</option>
+		<option value="005011" #{if params.subCategory == "005011"} selected="selected" #{/if}>&{'ad.subcategory.005011'}</option>
+		<option value="005012" #{if params.subCategory == "005012"} selected="selected" #{/if}>&{'ad.subcategory.005012'}</option>	
+		
+		<option value="006001" #{if params.subCategory == "006001"} selected="selected" #{/if}>&{'ad.subcategory.006001'}</option>
+		<option value="006002" #{if params.subCategory == "006002"} selected="selected" #{/if}>&{'ad.subcategory.006002'}</option>
+		<option value="006003" #{if params.subCategory == "006003"} selected="selected" #{/if}>&{'ad.subcategory.006003'}</option>
+		<option value="006004" #{if params.subCategory == "006004"} selected="selected" #{/if}>&{'ad.subcategory.006004'}</option>
+		<option value="006005" #{if params.subCategory == "006005"} selected="selected" #{/if}>&{'ad.subcategory.006005'}</option>
+		<option value="006006" #{if params.subCategory == "006006"} selected="selected" #{/if}>&{'ad.subcategory.006006'}</option>
+		<option value="006007" #{if params.subCategory == "006007"} selected="selected" #{/if}>&{'ad.subcategory.006007'}</option>			
+
+		<option value="007001" #{if params.subCategory == "007001"} selected="selected" #{/if}>&{'ad.subcategory.007001'}</option>
+		<option value="007002" #{if params.subCategory == "007002"} selected="selected" #{/if}>&{'ad.subcategory.007002'}</option>
+		<option value="007003" #{if params.subCategory == "007003"} selected="selected" #{/if}>&{'ad.subcategory.007003'}</option>
+		<option value="007004" #{if params.subCategory == "007004"} selected="selected" #{/if}>&{'ad.subcategory.007004'}</option>
+		<option value="007005" #{if params.subCategory == "007005"} selected="selected" #{/if}>&{'ad.subcategory.007005'}</option>
+		<option value="007006" #{if params.subCategory == "007006"} selected="selected" #{/if}>&{'ad.subcategory.007006'}</option>
+
+		<option value="008001" #{if params.subCategory == "008001"} selected="selected" #{/if}>&{'ad.subcategory.008001'}</option>
+		<option value="008002" #{if params.subCategory == "008002"} selected="selected" #{/if}>&{'ad.subcategory.008002'}</option>
+		<option value="008003" #{if params.subCategory == "008003"} selected="selected" #{/if}>&{'ad.subcategory.008003'}</option>
+		<option value="008004" #{if params.subCategory == "008004"} selected="selected" #{/if}>&{'ad.subcategory.008004'}</option>
+		
+		<option value="009001" #{if params.subCategory == "009001"} selected="selected" #{/if}>&{'ad.subcategory.009001'}</option>
+		<option value="009002" #{if params.subCategory == "009002"} selected="selected" #{/if}>&{'ad.subcategory.009002'}</option>
+		<option value="009003" #{if params.subCategory == "009003"} selected="selected" #{/if}>&{'ad.subcategory.009003'}</option>
+		<option value="009004" #{if params.subCategory == "009004"} selected="selected" #{/if}>&{'ad.subcategory.009004'}</option>
+		<option value="009005" #{if params.subCategory == "009005"} selected="selected" #{/if}>&{'ad.subcategory.009005'}</option>
+		<option value="009006" #{if params.subCategory == "009006"} selected="selected" #{/if}>&{'ad.subcategory.009006'}</option>
+		<option value="009007" #{if params.subCategory == "009007"} selected="selected" #{/if}>&{'ad.subcategory.009007'}</option>
+		<option value="009008" #{if params.subCategory == "009008"} selected="selected" #{/if}>&{'ad.subcategory.009008'}</option>
+		<option value="009009" #{if params.subCategory == "009009"} selected="selected" #{/if}>&{'ad.subcategory.009009'}</option>
+		
+		<option value="010001" #{if params.subCategory == "010001"} selected="selected" #{/if}>&{'ad.subcategory.010001'}</option>
+		<option value="010002" #{if params.subCategory == "010002"} selected="selected" #{/if}>&{'ad.subcategory.010002'}</option>
+		<option value="010003" #{if params.subCategory == "010003"} selected="selected" #{/if}>&{'ad.subcategory.010003'}</option>
+		<option value="010004" #{if params.subCategory == "010004"} selected="selected" #{/if}>&{'ad.subcategory.010004'}</option>
+		<option value="010005" #{if params.subCategory == "010005"} selected="selected" #{/if}>&{'ad.subcategory.010005'}</option>
+		<option value="010006" #{if params.subCategory == "010006"} selected="selected" #{/if}>&{'ad.subcategory.010006'}</option>
+		<option value="010007" #{if params.subCategory == "010007"} selected="selected" #{/if}>&{'ad.subcategory.010007'}</option>
+		<option value="010008" #{if params.subCategory == "010008"} selected="selected" #{/if}>&{'ad.subcategory.010008'}</option>
+		<option value="010009" #{if params.subCategory == "010009"} selected="selected" #{/if}>&{'ad.subcategory.010009'}</option>
+		<option value="010010" #{if params.subCategory == "010010"} selected="selected" #{/if}>&{'ad.subcategory.010010'}</option>		
+	</select>
+
+	<select class="span5" name="subCategory" id="subCategory">
+	</select>
+	<div class="error">#{error 'subCategory' /}</div>
+</div>
+
+
+#{if search}
+<div class="controls controls-row">
+  <input style="width:38%" type="text" name="filterAmountFrom" value="${params.filterAmountFrom}" placeholder="&{'amountFrom'}">&nbsp;
+  <input style="width:38%" type="text" name="filterAmountTo" value="${params.filterAmountTo}" placeholder="&{'amountTo'}">&nbsp;kg
+</div>
+<div class="error">#{error 'filterAmount' /}</div>
+
+<div class="controls controls-row">
+  <input style="width:38%" type="text" name="filterPriceFrom" value="${params.filterPriceFrom}" placeholder="&{'priceFrom'}">&nbsp;
+  <input style="width:38%" type="text" name="filterPriceTo" value="${params.filterPriceTo}" placeholder="&{'priceTo'}">&nbsp;&euro;
+</div>
+<div class="error">#{error 'filterPrice' /}</div>
+
+#{if user}
+<div style="margin-top:10px;"><a href="/edit-profile#location">&{'setYourPosition'} »</a></div>
+<input class="span3" type="text" name="distance" value="${params.distance}" placeholder="&{'searchDistance'}">
+<div class="error">#{error 'distance' /}</div>
+#{/if}
+
+<input class="span3" type="text" name="keyword" value="${params.keyword}" placeholder="&{'searchKeyword'}">
+<div class="error">#{error 'keyword' /}</div>
+
+
+#{/if}
+
+
+#{if !search}
+<div class="input-append">
+  <input type="text"  class="span5" id="amount" name="amount" value="${params.amount}"  placeholder="&{'amount'}"/>
+  <span class="add-on ">kg</span>
+</div>
+<div class="error">#{error 'amount' /}</div>
+
+
+<div class="input-append" >
+  <input type="text"  class="span5" id="price" name="price" value="${params.price}"  placeholder="&{'price'}"/>
+  <span class="add-on ">&euro;</span>
+</div>
+<div class="error">#{error 'price' /}</div>
+
+<div class="form-group">
+	<textarea class="" style="width:98%;height:80px !important" id="description" name="description"  placeholder="&{'description'}">${params.description}</textarea>
+	<div class="error">#{error 'description' /}</div>
+</div>
+#{/if}
+
+
+
+
+<!-- 
+<div class="form-group">
+	<label class="segoe" for="event-type">Event type</label>
+	<select class="form-control" id="event-type">
+		<option>Peer to peer call</option>
+		<option>Livecast</option>
+	</select>
+</div>
+
+<div class="form-group">
+	<label class="segoe">Something else</label>
+	<div class="checkbox">
+		<label> <input type="radio" name="event-privacy"
+			value="public"> Public
+		</label> 
+		<label> <input type="radio" name="event-privacy"
+			value="private"> Private
+		</label>
+	</div>
+</div>
+ -->

@@ -1,0 +1,295 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set background:'true' /}
+
+<div id="home-search-container" class="body">
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="widget pull-right">
+				<div class="row">
+					<div class="span12 head-container shadow">
+						<div class="row">
+							<div class="span6 hidden-phone">
+								<h3 class="head-title">&{'welcome'}</h3>
+								<p class="head-message">
+									<strong>&{'motivation1'}</strong><br /> 
+									&{'motivation2'}
+								</p>
+								#{if user}
+									<a class="btn btn-large btn-realto span2 header-cta" href="/profile">&{'my.account'}</a>
+								#{/if}
+								#{else}
+									<a class="btn btn-large btn-realto span2 header-cta" href="login">&{'login'}</a>
+									<a class="btn btn-large btn-realto span2 header-cta" href="registration">&{'registration'}</a>
+								#{/else}
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+							</div>
+							<div class="span6">
+								<div class="pull-right">
+								<div>
+									<a class="overlay" href="/search?type=001" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span>
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.001'}</span>
+										<img src="public/images/type001.jpg">
+									</a> 
+									<a class="overlay" href="/search?type=002" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span> 
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.002'}</span>
+										<img src="public/images/type002.jpg">
+									</a> 
+									<a class="overlay" href="/search?type=003" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span> 
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.003'}</span>
+										<img src="public/images/type003.jpg">
+									</a> 
+								</div>
+								<div>
+									<a class="overlay" href="/search?type=004" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span> 
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.004'}</span>
+										<img src="public/images/type004.jpg">
+									</a> 
+									<a class="overlay" href="/search?type=005" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span> 
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.005'}</span>
+										<img src="public/images/type005.jpg"
+									</a> 
+									<a class="overlay" href="/search?type=006" style="position:relative;width:180px;height:180px;display:table-cell !important"> 
+										<span class="more"> </span> 
+										<span style="position:absolute;top:0px;left:0px;color:white;font-weight:bold;background:rgba(0,0,0,0.5);padding:5px;">&{'ad.type.006'}</span>
+										<img src="public/images/type006.jpg">
+									</a> 
+								</div>
+								</div>
+								
+								
+							</div>
+							<!-- .span4 -->
+						</div>
+					</div>
+				</div>
+				<!-- .row -->
+			</div>
+			<!-- .search-holder -->
+		</div>
+		<!-- .span12 -->
+	</div>
+	<!-- .row -->
+
+</div>
+<!-- .container -->
+</div>
+
+
+
+
+#{if auctions}
+<div class="container">
+	<div class="row">
+		<div class="padding30"><div class="hammer"></div><b> &{'actualAuctions'}</b> <i class="pull-right"><a class="serif italic  " href="/search?priceType=002">&{'viewAll'} &raquo;</a></i></div>
+		
+		<div class="padding30 span12 box-container" style="margin-bottom: 0px;">
+			<div class="row" style="padding-left:30px !important">
+				<br/>
+				<div id="dsidx-primary-data" class="" style="font-size:0.8em;list-style:none">
+						<ul style="list-style:none;margin-left:0px;">
+						#{list items:auctions, as:'a'}
+						<li id="dsidx-price" class="auction-list">				
+							<a href="/ad?uuid=${a.uuid}" style="color:black">
+								<img class="" style="height:16px;" src="public/images/type${a.type}.jpg"/>&nbsp; 
+								 
+								<span style="color:black">&{'ad.type.'+a.type}
+								#{if a.category != null}
+									&{'ad.category.'+a.category}
+								#{/if}
+								#{if a.subCategory != null}
+									/ &{'ad.subcategory.'+a.subCategory}
+								#{/if}
+								</span>
+								<span style="font-size:0.8em" class="label label-success">Max ${a.maxPrice} &euro; ${a.offers}x</span>
+								<span style="font-size:0.8em" class="label label-default">${a.price} &euro;</span>
+								<span style="font-size:0.8em" class="label label-inverse">${a.amount} kg</span>
+								<br/>
+								<i class="icon-map-marker"></i> &{'country.'+a.locationCountry}
+								<i class="icon-time"></i> <b style="color:black">&{'ad.end'}</b> ${a.formatDate(a.validTo)}
+								<i class="icon-time"></i> <b style="color:black">&{'ad.auction.maxoffer'}</b> ${a.formatDate(a.lastOffer)}
+							</a>
+						</li>
+						#{/list}
+						</ul>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+#{/if}
+
+
+
+
+#{if repeats}
+<div class="container">
+	<br/>
+	<div class="row">
+		<div class="padding30" style="padding-top:0px;">
+			<b><i class="icon-user"></i> &{'newest.ads'}</b> 
+			<div class="carousel-navigation pull-right">
+				<a class="serif italic pull-left "	href="/search">&{'display.all.ads'}</a> 
+				<a class="left carousel-control pull-left" href="#realto-carousel"	data-slide="prev"><i class="icon-angle-left"></i></a> 
+				<a class="right carousel-control pull-right" href="#realto-carousel" data-slide="next"><i class="icon-angle-right"></i></a>
+			</div>
+		</div>
+
+
+		<div id="realto-carousel" class="carousel slide span12" style="padding-bottom:0px;">
+			<div class="carousel-inner">
+				
+				#{list items:repeats, as:'index'}
+				<div class="item #{if index == 0}active#{/if}">
+					<ul class="thumbnails">
+						#{list items:ads.get(index), as:'ad'}
+						<li class="span4 box-container">
+							<div class="holder">
+								<a class="overlay" href="/ad?uuid=${ad.uuid}" title=""> 
+									<span class="more"> <i class="icon-zoom-in"></i></span> 
+									#{if ad.type == "001"}
+										<img width="800" height="454" src="public/images/type${ad.type}${ad.category}.jpg" class="attachment-property-regular wp-post-image">
+									#{/if}
+									#{else}
+										<img width="800" height="454" src="public/images/type${ad.type}.jpg" class="attachment-property-regular wp-post-image">
+									#{/else}
+								</a> 
+								#{if ad.category == null || ad.category == ""}
+									<span class="prop-tag"> &{'ad.type.'+ad.type} </span>
+								#{/if}
+								#{else}
+									<span class="prop-tag"> &{'ad.category.'+ad.category} </span>
+								#{/else}
+								
+								
+								<div class="prop-info">
+									<ul class="more-info clearfix">
+										<li class="info-label clearfix">
+											<span class="pull-left"><i class="icon-calendar"></i> &{'ad.published'}</span>
+											<span class="qty pull-right">${ad.formatDate(ad.created)} </span>
+										</li>
+										<li class="info-label clearfix">
+											<span class="pull-left"><i class="icon-map-marker"></i> &{'location'}</span>
+											<span class="qty pull-right">&{'country.'+ad.locationCountry} </span>
+										</li>
+										<li class="info-label clearfix">
+											<span class="qty pull-right"><a href="/ad?uuid=${ad.uuid}">&{'moreInfo'} »</a> </span>
+										</li>
+										<li class="info-label clearfix">
+											<div class="pull-right">
+											<span style="font-size:1.0em;padding:8px;" class="label label-inverse">&{'price'}: ${ad.price} &euro;</span> 
+											<span style="font-size:1.0em;padding:8px;" class="label ">&{'amount'}: ${ad.amount} kg</span> 
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						#{/list}
+
+					</ul>
+				</div>
+				#{/list}
+				<!-- .item -->
+			</div>
+			<!-- .carousel-inner -->
+		</div>
+	</div>
+</div>
+#{/if}
+
+
+
+
+
+
+
+<br/>
+<div class="container">
+	<div class="row">
+		<div class="span4">
+			<div class="info-box">
+				<h2 class="secion-title">&{'why.us'}</h2>
+				<p>
+					&{'why.us.text'}
+					<br> 
+					<a class="serif italic" href="#" title="Continue"><nobr>&{'continue'} »</nobr></a>
+				</p>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="info-box">
+				<h3 class="info-head">&{'feature.1'}</h3>
+				<div class="row clearfix">
+					<div class="pull-left icons hidden-phone">
+						<i class="icon-briefcase"></i>
+					</div>
+					<div class="span3">
+						&{'feature.1.text'}
+						<a class="serif italic" href="http://" title="Continue"><nobr>&{'continue'} »</nobr></a>
+					</div>
+				</div>
+			</div>
+			<div class="info-box">
+				<h3 class="info-head">&{'feature.2'}</h3>
+				<div class="row clearfix">
+					<div class="pull-left icons hidden-phone">
+						<i class="icon-time"></i>
+					</div>
+					<div class="span3">
+						&{'feature.2.text'}
+						<a class="serif italic" href="http://ds" title="Continue"><nobr>&{'continue'} »</nobr></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="info-box">
+				<h3 class="info-head">&{'feature.3'}</h3>
+				<div class="row clearfix">
+					<div class="pull-left icons hidden-phone">
+						<i class="icon-cogs"></i>
+					</div>
+					<div class="span3">
+						&{'feature.3.text'}
+						<a class="serif italic" href="/dsd" title="Continue"><nobr>&{'continue'} »</nobr></a>
+					</div>
+				</div>
+			</div>
+			<div class="info-box">
+				<h3 class="info-head">&{'feature.4'}</h3>
+				<div class="row clearfix">
+					<div class="pull-left icons hidden-phone">
+						<i class="icon-thumbs-up"></i>
+					</div>
+					<div class="span3">
+						&{'feature.4.text'}
+						<a class="serif italic" href="/sasa" title="Continue"><nobr>&{'continue'} »</nobr></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span12 box-container">
+			<div class="row adv-message clearfix">
+				<div class="pull-left span7">
+					<p class="upper-line serif italic">&{'motivation1'}</p>
+					<p class="lower-line">&{'motivation2'}</p>
+				</div>
+				<a class="pull-right btn btn-large btn-realto span3"
+					href="/registration"
+					title="Buy It Now!">&{'registration.now'}</a>
+			</div>
+		</div>
+	</div>
+</div>
+

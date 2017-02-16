@@ -1,0 +1,81 @@
+#{extends 'main.html' /}
+#{set 'title'}
+	&{'contact.us'}
+#{/set}
+#{set background:'true' /}
+
+<div id="home-search-container" class="body">
+<div class="container">
+<div class="row">
+	<div class="span3"></div>
+	<div class="span6 shadow" style="padding:40px;background:rgba(255,255,255,0.9)">
+		<h2>&{'contact-us'}</h2>
+	    <hr>
+		<p>&{'contact-us-msg'}</p>
+		<i class="icon-envelope"></i> info@sti.com
+		<br/>
+		<br/>
+		
+	    #{if errors}
+	    	<div class="error">
+	    		#{error 'all' /}
+	    	</div>
+		#{/if} 
+		
+		<form action="/contact" method="POST">
+			#{if usr}
+				<input type="hidden" value="${usr.login}" name="id" />
+			#{/if}							
+			<input type="hidden" id="url"  value="${params.url == null ? url : params.url}" name="url">
+
+			#{if user == null}		
+			<div class="error">#{error 'name' /}</div>
+			<div class="form-group">
+				<label class="sr-only" for="name">&{'name'}</label>
+				<input type="text" class="span6" id="email" placeholder="&{'name'}" value="${params.name}" name="name">
+				<i class="fa fa-user form-control-feedback"></i>
+			</div>
+
+			<div class="error">#{error 'email' /}</div>
+			<div class="form-group has-feedback">
+				<label class="sr-only" for="email">&{'email-address'}</label>
+				<input type="email" class="span6" id="email" placeholder="&{'email-address'}" value="${params.email}" name="email">
+				<i class="fa fa-envelope form-control-feedback"></i>
+			</div>
+			#{/if}
+			
+			<div class="error">#{error 'subject' /}</div>
+			<div class="form-group has-feedback">
+				<label class="sr-only" for="name">&{'subject'}</label>
+				<input type="text" class="span6" id="name" placeholder="&{'subject'}" value="${params.subject}" name="subject">
+				<i class="fa fa-pencil form-control-feedback"></i>
+			</div>
+
+			<div class="error">#{error 'message' /}</div>
+			<div class="form-group has-feedback">
+				<label class="sr-only" for="message">&{'message'}</label>
+				<textarea class="span6" rows="4" id="message" placeholder="&{'message'}" value="${params.message}" name="message">${params.message}</textarea>
+				<i class="fa fa-pencil form-control-feedback"></i>
+			</div>
+
+			<div class="error">#{error 'captcha' /}</div>
+			<div class="form-group">
+				<input type="hidden" value="${params.uuid}" name="uuid" />
+				#{if user == null}
+				<input type="text" placeholder="&{'captcha'}" class="form-control" style="display:inline !important;width:20%" name="captcha"/>
+				<img src="/captcha?uuid=${params.uuid}">							
+				#{/if}
+				<input type="submit" value="&{'send'}" class="btn span2 btn-realto-form" style="margin:0px">
+				<div class="clearfix"></div>
+			</div>
+		</form>
+	</div>
+	<div class="span3"></div>
+
+</div>
+</div>
+</div>
+
+
+
+

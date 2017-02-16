@@ -1,0 +1,69 @@
+<div class='box-container'>                        
+  <div class='holder row'>                             							 	
+			
+	<a name="review"></a>
+    <div class='span9 prop-info'> 
+    	<h2>&{'yourRating'}</h2>
+		<a href="#" data-rating="1" style="font-size:2.0em" class="rating star1"><i class="icon-star"></i></a>
+		<a href="#" data-rating="2" style="font-size:2.0em" class="rating star2"><i class="icon-star"></i></a>
+		<a href="#" data-rating="3" style="font-size:2.0em" class="rating star3"><i class="icon-star"></i></a>
+		<a href="#" data-rating="4" style="font-size:2.0em" class="rating star4"><i class="icon-star"></i></a>
+		<a href="#" data-rating="5" style="font-size:2.0em" class="rating star5"><i class="icon-star"></i></a>
+    	<script>
+    		scrap.initRating();
+    	</script>
+   		<br/>
+   		<br/>
+    	<div class="controls">
+    		<form action="/rating" method="post">
+    		<div class="row">
+    		
+    			<div class="span4">
+		    		<h4>&{'satisfied'}</h4>
+					<label class="radio">
+					  <input type="radio" name="reason" value="1" checked>
+					  &{'rating1'}
+					</label>
+					<label class="radio">
+					  <input type="radio" name="reason" value="2">
+					  &{'rating2'}
+					</label>
+					<label class="radio">
+					  <input type="radio" name="reason" value="2">
+					  &{'rating3'}
+					</label>    				
+    			</div>
+    			
+    			<div class="span4">
+					<h4>&{'unsatisfied'}</h4>
+					<label class="radio">
+					  <input type="radio" name="reason" value="3">
+					  &{'rating4'}
+					</label>
+					<label class="radio">
+					  <input type="radio" name="reason" value="4">
+					  &{'rating5'}
+					</label>
+					<label class="radio">
+					  <input type="radio" name="reason" value="5">
+					  &{'rating6'}
+					</label>    				
+    			</div>
+    			
+    		</div>
+
+			<div class="error">#{error 'reason' /}</div>    	
+    		<br/>
+    		<textarea rows="3" name="description" style="width:98%;" placeholder="&{'ownRating'}"></textarea>
+			<div class="error">#{error 'description' /}</div>    	
+
+    		<input type="hidden" name="rating" id="rating" value="${flash.rating}" />
+    		<input type="hidden" name="ratedUser" value="${ad.user.uuid}" />
+    		<input type="hidden" name="adUuid" value="${ad.uuid}" />
+    		<input type="hidden" name="redirectUrl" value="#{if flash.redirectUrl == null}${request.url}#{/if}#{else}${flash.redirectUrl}#{/else}" />
+    		<button type="submit" class="btn  btn-realto pull-right">&{'submit'}</button> 
+    		</form>
+	    </div>
+    </div>                        
+  </div>                    
+</div>
